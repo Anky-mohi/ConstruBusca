@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConstruBusca - Diretório de Profissionais da Construção</title>
+    <title>PowerScan Analytics Dashboard</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #2C3E50;
-            --secondary: #F39C12;
-            --light: #ECF0F1;
-            --dark: #1A252F;
-            --accent: #E74C3C;
-            --text: #333;
-            --gray: #95A5A6;
-            --white: #FFFFFF;
+            --primary-yellow: #ffc107;
+            --secondary-orange: #ff9800;
+            --dark-gray: #4a4a4a;
+            --light-gray: #f0f0f0;
+            --white: #ffffff;
+            --sidebar-width: 240px;
         }
         
         * {
@@ -25,839 +23,1529 @@
         }
         
         body {
-            background-color: #F5F5F5;
-            color: var(--text);
-            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: var(--dark-gray);
+            overflow-x: hidden;
         }
         
-        /* Header & Navigation */
-        header {
-            background-color: var(--primary);
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--dark-gray);
+            color: var(--white);
             padding: 1rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            transition: all 0.3s ease;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
         }
         
-        .navbar {
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0 0.5rem;
+        }
+        
+        .lightning {
+            color: var(--primary-yellow);
+            font-size: 2rem;
+            margin-right: 0.5rem;
+            position: relative;
+        }
+        
+        .lightning::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            background-color: var(--secondary-orange);
+            top: 30%;
+            left: 20%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .sidebar-menu {
+            margin-top: 2rem;
+        }
+        
+        .sidebar-menu h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            opacity: 0.6;
+            letter-spacing: 1px;
+            padding: 0 0.5rem;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 0.3rem;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .menu-item.active {
+            background-color: var(--primary-yellow);
+            color: var(--dark-gray);
+        }
+        
+        .menu-item i {
+            margin-right: 0.8rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .user-section {
+            margin-top: 2rem;
+            padding: 1rem 0.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.8rem;
+            font-weight: bold;
+            color: var(--dark-gray);
+        }
+        
+        .user-details h4 {
+            font-size: 0.9rem;
+        }
+        
+        .user-details p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .user-role {
+            background-color: var(--secondary-orange);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 0.3rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+        }
+        
+        .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
+            margin-bottom: 2rem;
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-            color: var(--white);
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .logo i {
-            color: var(--secondary);
-            margin-right: 0.5rem;
-            font-size: 1.8rem;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 1.5rem;
-        }
-        
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-        
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
-        
-        .menu-toggle {
-            display: none;
-            color: var(--white);
-            font-size: 1.5rem;
+        .toggle-sidebar {
+            background: none;
+            border: none;
+            color: var(--dark-gray);
+            font-size: 1.2rem;
             cursor: pointer;
         }
         
-        /* Banner Area */
-        .banner-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        
-        .banner-main {
-            background-color: var(--white);
-            height: 90px;
-            margin-bottom: 1rem;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .banner-label {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            background-color: rgba(0,0,0,0.5);
-            color: white;
-            padding: 2px 6px;
-            font-size: 0.7rem;
-            border-radius: 3px;
-        }
-        
-        .banner-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .banner-placeholder {
-            background: linear-gradient(45deg, var(--secondary), var(--accent));
-            color: white;
-            text-align: center;
-            font-size: 1.2rem;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .banner-side-container {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .banner-side {
+        .search-container {
             flex: 1;
-            height: 250px;
-            background-color: var(--white);
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            overflow: hidden;
+            margin: 0 2rem;
             position: relative;
         }
         
-        /* Categories Section */
-        .categories {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 1rem;
+        .search-container input {
+            width: 100%;
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
         }
         
-        .section-title {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            text-align: center;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-        
-        .section-title::after {
-            content: '';
+        .search-icon {
             position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background-color: var(--secondary);
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
         }
         
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
+        .top-actions {
+            display: flex;
+            align-items: center;
         }
         
-        .category-card {
-            background-color: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-            padding: 1.5rem 1rem;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+        .top-action-btn {
+            background: none;
+            border: none;
+            color: var(--dark-gray);
+            font-size: 1.2rem;
+            margin-left: 1rem;
             cursor: pointer;
+            position: relative;
         }
         
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        .notification-dot {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #f44336;
         }
         
-        .category-icon {
-            color: var(--secondary);
-            font-size: 2.5rem;
+        /* Dashboard Header */
+        .dashboard-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .dashboard-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-header p {
+            color: #777;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            background-color: var(--white);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 1rem;
         }
         
-        .category-name {
-            font-weight: 600;
-            font-size: 1rem;
+        .filter-header h2 {
+            font-size: 1.1rem;
         }
         
-        /* Professionals Section */
-        .professionals {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 1rem;
-        }
-        
-        .professionals-grid {
+        .filter-form {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 1rem;
         }
         
-        .professional-card {
-            background-color: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .professional-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-        
-        .professional-image {
-            height: 200px;
-            width: 100%;
-            object-fit: cover;
-        }
-        
-        .professional-info {
-            padding: 1.5rem;
-        }
-        
-        .professional-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        
-        .professional-category {
-            font-size: 0.9rem;
-            color: var(--secondary);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-        
-        .professional-location {
-            font-size: 0.85rem;
-            color: var(--gray);
-            margin-bottom: 0.8rem;
+        .form-group {
             display: flex;
-            align-items: center;
+            flex-direction: column;
         }
         
-        .professional-location i {
+        .form-group label {
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+        
+        .form-group select,
+        .form-group input {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-outline {
+            border: 1px solid var(--dark-gray);
+            background: transparent;
+            color: var(--dark-gray);
+            margin-right: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-yellow);
+            color: var(--dark-gray);
+        }
+        
+        .btn i {
             margin-right: 0.3rem;
         }
         
-        .professional-description {
-            font-size: 0.9rem;
-            color: var(--text);
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-        
-        .whatsapp-button {
-            display: inline-flex;
-            align-items: center;
-            background-color: #25D366;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-        
-        .whatsapp-button:hover {
-            background-color: #1fae56;
-        }
-        
-        .whatsapp-button i {
-            margin-right: 0.5rem;
-        }
-        
-        /* Advertisement Section */
-        .advertise {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 3rem 1rem;
-            text-align: center;
-        }
-        
-        .advertise-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .advertise-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--white);
-        }
-        
-        .advertise-subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            color: var(--light);
-            font-weight: 300;
-        }
-        
-        .advertise-button {
-            display: inline-block;
-            background-color: var(--secondary);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .advertise-button:hover {
-            background-color: #e67e22;
-        }
-        
-        /* News Section */
-        .news {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 1rem;
-        }
-        
-        .news-grid {
+        /* Stats Section */
+        .stats-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-gap: 1rem;
+            margin-bottom: 1.5rem;
         }
         
-        .news-card {
+        .stat-card {
             background-color: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .news-image {
-            height: 180px;
-            width: 100%;
-            object-fit: cover;
-        }
-        
-        .news-content {
             padding: 1.5rem;
-        }
-        
-        .news-date {
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin-bottom: 0.5rem;
-        }
-        
-        .news-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: var(--primary);
-        }
-        
-        .news-excerpt {
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-        
-        .news-link {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .news-link i {
-            margin-left: 0.3rem;
-            font-size: 0.8rem;
-        }
-        
-        /* About Us Section */
-        .about {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 1rem;
-        }
-        
-        .about-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .about-image {
-            flex: 1;
-            min-width: 300px;
-            height: 300px;
-            background-color: var(--gray);
-            border-radius: 8px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
             overflow: hidden;
         }
         
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .about-content {
-            flex: 2;
-            min-width: 300px;
-        }
-        
-        .about-title {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .about-text {
-            margin-bottom: 1.5rem;
-            color: var(--text);
-            line-height: 1.7;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: var(--light);
-            padding: 3rem 0 1rem;
-        }
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: var(--white);
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-        
-        .footer-column h3::after {
+        .stat-card::after {
             content: '';
             position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--secondary);
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 193, 7, 0.1);
+            border-radius: 50%;
+            top: -20px;
+            right: -20px;
         }
         
-        .footer-links {
-            list-style: none;
+        .stat-icon {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color: var(--primary-yellow);
         }
         
-        .footer-links li {
-            margin-bottom: 0.8rem;
+        .stat-number {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
         }
         
-        .footer-links a {
-            color: var(--light);
-            text-decoration: none;
-            transition: color 0.3s;
+        .stat-label {
+            font-size: 0.9rem;
+            color: #777;
         }
         
-        .footer-links a:hover {
-            color: var(--secondary);
-        }
-        
-        .footer-contact p {
-            margin-bottom: 0.8rem;
+        .stat-trend {
             display: flex;
             align-items: center;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
         }
         
-        .footer-contact i {
-            margin-right: 0.5rem;
-            color: var(--secondary);
+        .trend-up {
+            color: #4caf50;
         }
         
-        .social-links {
+        .trend-down {
+            color: #f44336;
+        }
+        
+        /* Chart Section */
+        .chart-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-card {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chart-header {
             display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
         }
         
-        .social-icon {
+        .chart-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .chart-actions {
+            display: flex;
+        }
+        
+        .chart-actions button {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            color: #777;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .chart-container {
+            min-height: 300px;
+            margin-top: 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 36px;
-            height: 36px;
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            color: var(--white);
-            transition: background-color 0.3s, color 0.3s;
         }
         
-        .social-icon:hover {
-            background-color: var(--secondary);
-            color: var(--white);
+        .chart-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #aaa;
         }
         
-        .copyright {
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+        /* Data Table Section */
+        .data-section {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        
+        .data-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .data-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .data-actions {
+            display: flex;
+        }
+        
+        .data-actions button {
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .data-actions button i {
+            margin-right: 0.3rem;
+        }
+        
+        .btn-export {
+            background-color: #e0f2f1;
+            color: #00897b;
+            border: none;
+        }
+        
+        .btn-share {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            border: none;
+        }
+        
+        .btn-pdf {
+            background-color: #ffebee;
+            color: #e53935;
+            border: none;
+        }
+        
+        .btn-powerbi {
+            background-color: #f3e5f5;
+            color: #8e24aa;
+            border: none;
+        }
+        
+        .data-table-container {
+            overflow-x: auto;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table th {
+            font-weight: 500;
+            color: #777;
+            font-size: 0.85rem;
+        }
+        
+        .data-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .status-badge {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.75rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .status-normal {
+            background-color: #e8f5e9;
+            color: #43a047;
+        }
+        
+        .status-warning {
+            background-color: #fff8e1;
+            color: #ffa000;
+        }
+        
+        .status-critical {
+            background-color: #ffebee;
+            color: #e53935;
+        }
+        
+        .table-actions {
+            display: flex;
+        }
+        
+        .table-actions button {
+            background: none;
+            border: none;
+            color: #777;
+            margin-right: 0.5rem;
+            cursor: pointer;
             font-size: 0.9rem;
-            color: var(--gray);
         }
         
-        /* Responsive Design */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .pagination-info {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .pagination-controls button {
+            background: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.2rem;
+            cursor: pointer;
+        }
+        
+        .pagination-controls button.active {
+            background-color: var(--primary-yellow);
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+        
+        /* Map Section */
+        .map-section {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .map-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .map-container {
+            height: 400px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #aaa;
+        }
+        
+        /* Access Control Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            animation: modalFade 0.3s;
+        }
+        
+        @keyframes modalFade {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--dark-gray);
+        }
+        
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .role-selector {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+        
+        .role-option {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .role-option:first-child {
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .role-option:last-child {
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .role-option.active {
+            background-color: var(--primary-yellow);
+            border-color: var(--primary-yellow);
+            color: var(--dark-gray);
+        }
+        
+        .role-option i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .permission-list {
+            margin-bottom: 1.5rem;
+        }
+        
+        .permission-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .permission-item:last-child {
+            border-bottom: none;
+        }
+        
+        .permission-name {
+            font-size: 0.9rem;
+        }
+        
+        .permission-desc {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 0.2rem;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary-yellow);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(18px);
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 2rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid #eee;
+            color: #777;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .chart-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1000;
             }
             
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                background-color: var(--primary);
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
                 width: 100%;
-                height: calc(100vh - 70px);
-                flex-direction: column;
-                align-items: center;
-                padding-top: 2rem;
-                transition: left 0.3s;
             }
             
-            .nav-links.active {
-                left: 0;
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .search-container {
+                display: none;
             }
             
-            .nav-links li {
-                margin: 1rem 0;
+            .stats-section {
+                grid-template-columns: 1fr;
             }
             
-            .banner-side-container {
-                flex-direction: column;
+            .data-actions {
+                display: none;
             }
             
-            .about-container {
-                flex-direction: column;
+            .data-actions-dropdown {
+                display: block;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <a href="#" class="logo">
-                <i class="fas fa-hard-hat"></i>
-                ConstruBusca
-            </a>
-            <div class="menu-toggle" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Profissionais</a></li>
-                <li><a href="#">Anuncie</a></li>
-                <li><a href="#">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section class="banner-container">
-        <div class="banner-main">
-            <div class="banner-placeholder">
-                Banner Principal 728x90
-            </div>
-            <span class="banner-label">Anúncio</span>
-        </div>
-        <div class="banner-side-container">
-            <div class="banner-side">
-                <div class="banner-placeholder">
-                    Banner Lateral 300x250
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="lightning">
+                    <i class="fas fa-bolt"></i>
                 </div>
-                <span class="banner-label">Anúncio</span>
-            </div>
-            <div class="banner-side">
-                <div class="banner-placeholder">
-                    Banner Lateral 300x250
-                </div>
-                <span class="banner-label">Anúncio</span>
-            </div>
-        </div>
-    </section>
-    
-    <section class="categories">
-        <h2 class="section-title">Categorias de Profissionais</h2>
-        <div class="category-grid">
-            <div class="category-card">
-                <i class="fas fa-drafting-compass category-icon"></i>
-                <div class="category-name">Arquitetos</div>
-            </div>
-            <div class="category-card">
-                <i class="fas fa-bolt category-icon"></i>
-                <div class="category-name">Eletricistas</div>
-            </div>
-            <div class="category-card">
-                <i class="fas fa-faucet category-icon"></i>
-                <div class="category-name">Encanadores</div>
-            </div>
-            <div class="category-card">
-                <i class="fas fa-paint-roller category-icon"></i>
-                <div class="category-name">Pintores</div>
-            </div>
-            <div class="category-card">
-                <i class="fas fa-hammer category-icon"></i>
-                <div class="category-name">Carpinteiros</div>
-            </div>
-            <div class="category-card">
-                <i class="fas fa-home category-icon"></i>
-                <div class="category-name">Pedreiros</div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="professionals">
-        <h2 class="section-title">Profissionais em Destaque</h2>
-        <div class="professionals-grid">
-            <div class="professional-card">
-                <img src="/api/placeholder/400/320" alt="placeholder" class="professional-image">
-                <div class="professional-info">
-                    <h3 class="professional-name">Carlos Silva</h3>
-                    <div class="professional-category">Eletricista</div>
-                    <div class="professional-location">
-                        <i class="fas fa-map-marker-alt"></i> São Paulo, SP
-                    </div>
-                    <p class="professional-description">
-                        Eletricista com mais de 10 anos de experiência, especializado em instalações residenciais e comerciais.
-                    </p>
-                    <a href="#" class="whatsapp-button">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <div class="logo-text">
+                    <h1>PowerScan</h1>
+                    <p>Power Line Diagnosis</p>
                 </div>
             </div>
             
-            <div class="professional-card">
-                <img src="/api/placeholder/400/320" alt="placeholder" class="professional-image">
-                <div class="professional-info">
-                    <h3 class="professional-name">Ana Costa</h3>
-                    <div class="professional-category">Arquiteta</div>
-                    <div class="professional-location">
-                        <i class="fas fa-map-marker-alt"></i> Rio de Janeiro, RJ
-                    </div>
-                    <p class="professional-description">
-                        Arquiteta especializada em projetos residenciais sustentáveis e design de interiores moderno.
-                    </p>
-                    <a href="#" class="whatsapp-button">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                </div>
-            </div>
-            
-            <div class="professional-card">
-                <img src="/api/placeholder/400/320" alt="placeholder" class="professional-image">
-                <div class="professional-info">
-                    <h3 class="professional-name">Roberto Almeida</h3>
-                    <div class="professional-category">Encanador</div>
-                    <div class="professional-location">
-                        <i class="fas fa-map-marker-alt"></i> Belo Horizonte, MG
-                    </div>
-                    <p class="professional-description">
-                        Serviços de encanamento em geral, detecção de vazamentos e instalação de sistemas hidráulicos.
-                    </p>
-                    <a href="#" class="whatsapp-button">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                </div>
-            </div>
-            
-            <div class="professional-card">
-                <img src="/api/placeholder/400/320" alt="placeholder" class="professional-image">
-                <div class="professional-info">
-                    <h3 class="professional-name">Juliana Santos</h3>
-                    <div class="professional-category">Pintora</div>
-                    <div class="professional-location">
-                        <i class="fas fa-map-marker-alt"></i> Curitiba, PR
-                    </div>
-                    <p class="professional-description">
-                        Pintora profissional com experiência em pinturas decorativas, texturas e efeitos especiais.
-                    </p>
-                    <a href="#" class="whatsapp-button">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="advertise">
-        <div class="advertise-container">
-            <h2 class="advertise-title">Anuncie no ConstruBusca</h2>
-            <p class="advertise-subtitle">
-                Destaque sua empresa com banners estratégicos no principal diretório de profissionais da construção do Brasil.
-            </p>
-            <a href="#" class="advertise-button">Anuncie Conosco</a>
-        </div>
-    </section>
-    
-    <section class="news">
-        <h2 class="section-title">Notícias e Dicas</h2>
-        <div class="news-grid">
-            <div class="news-card">
-                <img src="/api/placeholder/400/320" alt="placeholder" class="news-image">
-                <div class="news-content">
-                    <div class="news-date">12 de Abril, 2025</div>
-                    <h3 class="news-title">5 Dicas para Economizar na Reforma</h3>
-                    <p class="news-excerpt">
-                        Confira nossas dicas para economizar no orçamento da sua reforma sem comprometer a qualidade.
-                    </p>
-                    <a href="#" class="news-link">
-                        Leia mais <i class="fas fa-chevron-right"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/320" alt="placeholder" class="news-image">
-                <div class="news-content">
-                    <div class="news-date">8 de Abril, 2025</div>
-                    <h3 class="news-title">Como Escolher o Melhor Profissional</h3>
-                    <p class="news-excerpt">
-                        Aprenda a identificar os melhores profissionais para cada tipo de serviço na sua construção.
-                    </p>
-                    <a href="#" class="news-link">
-                        Leia mais <i class="fas fa-chevron-right"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/320" alt="placeholder" class="news-image">
-                <div class="news-content">
-                    <div class="news-date">2 de Abril, 2025</div>
-                    <h3 class="news-title">Tendências em Acabamentos 2025</h3>
-                    <p class="news-excerpt">
-                        Conheça as tendências em materiais e acabamentos que estão dominando o mercado de construção.
-                    </p>
-                    <a href="#" class="news-link">
-                        Leia mais <i class="fas fa-chevron-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="about">
-        <h2 class="section-title">Sobre Nós</h2>
-        <div class="about-container">
-            <div class="about-image">
-                <img src="/api/placeholder/400/320" alt="placeholder">
-            </div>
-            <div class="about-content">
-                <h3 class="about-title">ConstruBusca - Conectando Profissionais e Clientes</h3>
-                <p class="about-text">
-                    O ConstruBusca é a maior plataforma digital para encontrar profissionais qualificados da construção civil em todo o Brasil. Nossa missão é conectar clientes com os melhores profissionais do setor, facilitando o acesso a serviços de qualidade.
-                </p>
-                <p class="about-text">
-                    Criado em 2024, o ConstruBusca já conta com mais de 5.000 profissionais cadastrados em diversas categorias, desde arquitetos e engenheiros até pintores e pedreiros, atendendo a todas as necessidades do setor da construção civil.
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="footer-container">
-            <div class="footer-column">
-                <h3>ConstruBusca</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Profissionais</a></li>
-                    <li><a href="#">Categorias</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Sobre Nós</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h3>Para Profissionais</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Cadastre-se</a></li>
-                    <li><a href="#">Como Funciona</a></li>
-                    <li><a href="#">Planos e Preços</a></li>
-                    <li><a href="#">Termos de Uso</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column footer-contact">
-                <h3>Contato</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000, São Paulo - SP</p>
-                <p><i class="fas fa-phone"></i> (11) 9999-8888</p>
-                <p><i class="fas fa-envelope"></i> contato@construbusca.com.br</p>
+            <div class="sidebar-menu">
+                <h3>Main</h3>
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-bolt"></i>
+                    <span>Inspections</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>KML Viewer</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>PDF Reports</span>
+                </a>
                 
-                <div class="social-links">
-                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                <h3>Analytics</h3>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Performance</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Power BI Integration</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-temperature-high"></i>
+                    <span>FLIR Analytics</span>
+                </a>
+                
+                <h3>Management</h3>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>User Access</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-database"></i>
+                    <span>Backup</span>
+                </a>
+            </div>
+            
+            <div class="user-section">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        AM
+                    </div>
+                    <div class="user-details">
+                        <h4>Admin Manager</h4>
+                        <p>admin@powerscan.com</p>
+                        <span class="user-role">Admin Access</span>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="copyright">
-            &copy; 2025 ConstruBusca - Todos os direitos reservados
+        <div class="main-content" id="main-content">
+            <div class="top-bar">
+                <button class="toggle-sidebar" id="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Search inspections, reports, or locations...">
+                </div>
+                
+                <div class="top-actions">
+                    <button class="top-action-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <button class="top-action-btn">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                    <button class="top-action-btn" id="open-access-modal">
+                        <i class="fas fa-shield-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="dashboard-header">
+                <h1>Power Line Analytics Dashboard</h1>
+                <p>Monitor and analyze power line inspection data in real-time</p>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-header">
+                    <h2>Filter Data</h2>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-filter"></i> Apply Filters
+                    </button>
+                </div>
+                
+                <div class="filter-form">
+                    <div class="form-group">
+                        <label>Date Range</label>
+                        <select>
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 90 days</option>
+                            <option>Custom range</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Region</label>
+                        <select>
+                            <option>All Regions</option>
+                            <option>North District</option>
+                            <option>South District</option>
+                            <option>East District</option>
+                            <option>West District</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Inspection Type</label>
+                        <select>
+                            <option>All Types</option>
+                            <option>Thermal</option>
+                            <option>Visual</option>
+                            <option>Corona</option>
+                            <option>Lidar</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select>
+                            <option>All Status</option>
+                            <option>Normal</option>
+                            <option>Warning</option>
+                            <option>Critical</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="stat-number">2,547</div>
+                    <div class="stat-label">Total Inspections</div>
+                    <div class="stat-trend trend-up">
+                        <i class="fas fa-arrow-up"></i> 12% from last month
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-number">186</div>
+                    <div class="stat-label">Identified Issues</div>
+                    <div class="stat-trend trend-down">
+                        <i class="fas fa-arrow-down"></i> 3% from last month
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-thermometer-half"></i>
+                    </div>
+                    <div class="stat-number">98.7%</div>
+                    <div class="stat-label">Network Reliability
+
+                    </div>
+                    <div class="stat-trend trend-up">
+                        <i class="fas fa-arrow-up"></i> 0.5% from last month
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="stat-number">42</div>
+                    <div class="stat-label">Maintenance Dispatches</div>
+                    <div class="stat-trend trend-down">
+                        <i class="fas fa-arrow-down"></i> 8% from last month
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-section">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">Inspection Results Trend</div>
+                        <div class="chart-actions">
+                            <button><i class="fas fa-redo"></i></button>
+                            <button><i class="fas fa-download"></i></button>
+                            <button><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-placeholder">
+                            <!-- For the Line Chart - Replace the chart-placeholder div in the first chart-container -->
+<div class="chart-container">
+    <svg id="line-chart" width="100%" height="300" viewBox="0 0 800 300">
+        <!-- Grid lines -->
+        <line x1="50" y1="250" x2="750" y2="250" stroke="#ddd" stroke-width="1" />
+        <line x1="50" y1="200" x2="750" y2="200" stroke="#ddd" stroke-width="1" />
+        <line x1="50" y1="150" x2="750" y2="150" stroke="#ddd" stroke-width="1" />
+        <line x1="50" y1="100" x2="750" y2="100" stroke="#ddd" stroke-width="1" />
+        <line x1="50" y1="50" x2="750" y2="50" stroke="#ddd" stroke-width="1" />
+        
+        <!-- Axes -->
+        <line x1="50" y1="250" x2="750" y2="250" stroke="#666" stroke-width="2" />
+        <line x1="50" y1="50" x2="50" y2="250" stroke="#666" stroke-width="2" />
+        
+        <!-- Data Line for Normal status -->
+        <path d="M100,180 L200,160 L300,165 L400,140 L500,120 L600,130 L700,110" 
+              fill="none" stroke="#4caf50" stroke-width="3" />
+              
+        <!-- Data Line for Warning status -->
+        <path d="M100,200 L200,210 L300,190 L400,185 L500,195 L600,180 L700,190" 
+              fill="none" stroke="#ffc107" stroke-width="3" />
+              
+        <!-- Data Line for Critical status -->
+        <path d="M100,230 L200,225 L300,235 L400,220 L500,240 L600,230 L700,220" 
+              fill="none" stroke="#e53935" stroke-width="3" />
+        
+        <!-- Data points for Normal -->
+        <circle cx="100" cy="180" r="5" fill="#4caf50" />
+        <circle cx="200" cy="160" r="5" fill="#4caf50" />
+        <circle cx="300" cy="165" r="5" fill="#4caf50" />
+        <circle cx="400" cy="140" r="5" fill="#4caf50" />
+        <circle cx="500" cy="120" r="5" fill="#4caf50" />
+        <circle cx="600" cy="130" r="5" fill="#4caf50" />
+        <circle cx="700" cy="110" r="5" fill="#4caf50" />
+        
+        <!-- Data points for Warning -->
+        <circle cx="100" cy="200" r="5" fill="#ffc107" />
+        <circle cx="200" cy="210" r="5" fill="#ffc107" />
+        <circle cx="300" cy="190" r="5" fill="#ffc107" />
+        <circle cx="400" cy="185" r="5" fill="#ffc107" />
+        <circle cx="500" cy="195" r="5" fill="#ffc107" />
+        <circle cx="600" cy="180" r="5" fill="#ffc107" />
+        <circle cx="700" cy="190" r="5" fill="#ffc107" />
+        
+        <!-- Data points for Critical -->
+        <circle cx="100" cy="230" r="5" fill="#e53935" />
+        <circle cx="200" cy="225" r="5" fill="#e53935" />
+        <circle cx="300" cy="235" r="5" fill="#e53935" />
+        <circle cx="400" cy="220" r="5" fill="#e53935" />
+        <circle cx="500" cy="240" r="5" fill="#e53935" />
+        <circle cx="600" cy="230" r="5" fill="#e53935" />
+        <circle cx="700" cy="220" r="5" fill="#e53935" />
+        
+        <!-- X axis labels -->
+        <text x="100" y="270" font-size="12" text-anchor="middle">Jan</text>
+        <text x="200" y="270" font-size="12" text-anchor="middle">Feb</text>
+        <text x="300" y="270" font-size="12" text-anchor="middle">Mar</text>
+        <text x="400" y="270" font-size="12" text-anchor="middle">Apr</text>
+        <text x="500" y="270" font-size="12" text-anchor="middle">May</text>
+        <text x="600" y="270" font-size="12" text-anchor="middle">Jun</text>
+        <text x="700" y="270" font-size="12" text-anchor="middle">Jul</text>
+        
+        <!-- Y axis labels -->
+        <text x="40" y="250" font-size="12" text-anchor="end">0</text>
+        <text x="40" y="200" font-size="12" text-anchor="end">25</text>
+        <text x="40" y="150" font-size="12" text-anchor="end">50</text>
+        <text x="40" y="100" font-size="12" text-anchor="end">75</text>
+        <text x="40" y="50" font-size="12" text-anchor="end">100</text>
+        
+        <!-- Legend -->
+        <rect x="600" y="30" width="12" height="12" fill="#4caf50" />
+        <text x="620" y="40" font-size="12">Normal</text>
+        
+        <rect x="600" y="50" width="12" height="12" fill="#ffc107" />
+        <text x="620" y="60" font-size="12">Warning</text>
+        
+        <rect x="600" y="70" width="12" height="12" fill="#e53935" />
+        <text x="620" y="80" font-size="12">Critical</text>
+    </svg>
+</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">Issue Types Distribution</div>
+                        <div class="chart-actions">
+                            <button><i class="fas fa-redo"></i></button>
+                            <button><i class="fas fa-download"></i></button>
+                            <button><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-placeholder">
+                           <!-- For the Pie Chart - Replace the chart-placeholder div in the second chart-container -->
+<div class="chart-container">
+    <svg id="pie-chart" width="100%" height="300" viewBox="0 0 400 300">
+        <!-- Pie slices -->
+        <!-- Thermal Issues: 45% -->
+        <path d="M200,150 L200,30 A120,120 0 0,1 304.4,209.4 z" fill="#ff9800" />
+        
+        <!-- Connector Issues: 25% -->
+        <path d="M200,150 L304.4,209.4 A120,120 0 0,1 113.6,256.7 z" fill="#2196f3" />
+        
+        <!-- Vegetation: 15% -->
+        <path d="M200,150 L113.6,256.7 A120,120 0 0,1 82.7,143.6 z" fill="#4caf50" />
+        
+        <!-- Structural: 10% -->
+        <path d="M200,150 L82.7,143.6 A120,120 0 0,1 138.2,47.3 z" fill="#9c27b0" />
+        
+        <!-- Other: 5% -->
+        <path d="M200,150 L138.2,47.3 A120,120 0 0,1 200,30 z" fill="#e53935" />
+        
+        <!-- Center circle (optional) -->
+        <circle cx="200" cy="150" r="40" fill="white" />
+        
+        <!-- Legend -->
+        <rect x="280" y="80" width="12" height="12" fill="#ff9800" />
+        <text x="300" y="90" font-size="12">Thermal (45%)</text>
+        
+        <rect x="280" y="110" width="12" height="12" fill="#2196f3" />
+        <text x="300" y="120" font-size="12">Connector (25%)</text>
+        
+        <rect x="280" y="140" width="12" height="12" fill="#4caf50" />
+        <text x="300" y="150" font-size="12">Vegetation (15%)</text>
+        
+        <rect x="280" y="170" width="12" height="12" fill="#9c27b0" />
+        <text x="300" y="180" font-size="12">Structural (10%)</text>
+        
+        <rect x="280" y="200" width="12" height="12" fill="#e53935" />
+        <text x="300" y="210" font-size="12">Other (5%)</text>
+    </svg>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="data-section">
+                <div class="data-header">
+                    <div class="data-title">Recent Inspections</div>
+                    <div class="data-actions">
+                        <button class="btn-export"><i class="fas fa-file-excel"></i> Export Excel</button>
+                        <button class="btn-share"><i class="fas fa-share-alt"></i> Share</button>
+                        <button class="btn-pdf"><i class="fas fa-file-pdf"></i> PDF</button>
+                        <button class="btn-powerbi"><i class="fas fa-chart-bar"></i> Power BI</button>
+                    </div>
+                </div>
+                
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Location</th>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Temperature</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>INS-2023-1458</td>
+                                <td>North District - Sector 7</td>
+                                <td>Apr 5, 2025</td>
+                                <td>Thermal</td>
+                                <td><span class="status-badge status-warning">Warning</span></td>
+                                <td>78.5°C</td>
+                                <td class="table-actions">
+                                    <button><i class="fas fa-eye"></i></button>
+                                    <button><i class="fas fa-download"></i></button>
+                                    <button><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>INS-2023-1457</td>
+                                <td>East District - Main Line</td>
+                                <td>Apr 4, 2025</td>
+                                <td>Visual</td>
+                                <td><span class="status-badge status-normal">Normal</span></td>
+                                <td>42.1°C</td>
+                                <td class="table-actions">
+                                    <button><i class="fas fa-eye"></i></button>
+                                    <button><i class="fas fa-download"></i></button>
+                                    <button><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>INS-2023-1456</td>
+                                <td>South District - Junction B</td>
+                                <td>Apr 3, 2025</td>
+                                <td>Corona</td>
+                                <td><span class="status-badge status-critical">Critical</span></td>
+                                <td>92.7°C</td>
+                                <td class="table-actions">
+                                    <button><i class="fas fa-eye"></i></button>
+                                    <button><i class="fas fa-download"></i></button>
+                                    <button><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>INS-2023-1455</td>
+                                <td>West District - Substation 3</td>
+                                <td>Apr 3, 2025</td>
+                                <td>Lidar</td>
+                                <td><span class="status-badge status-normal">Normal</span></td>
+                                <td>39.2°C</td>
+                                <td class="table-actions">
+                                    <button><i class="fas fa-eye"></i></button>
+                                    <button><i class="fas fa-download"></i></button>
+                                    <button><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>INS-2023-1454</td>
+                                <td>North District - Tower 42</td>
+                                <td>Apr 2, 2025</td>
+                                <td>Thermal</td>
+                                <td><span class="status-badge status-warning">Warning</span></td>
+                                <td>67.8°C</td>
+                                <td class="table-actions">
+                                    <button><i class="fas fa-eye"></i></button>
+                                    <button><i class="fas fa-download"></i></button>
+                                    <button><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <div class="pagination-info">
+                        Showing 1 to 5 of 125 entries
+                    </div>
+                    <div class="pagination-controls">
+                        <button><i class="fas fa-chevron-left"></i></button>
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>...</button>
+                        <button>25</button>
+                        <button><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-section">
+                <div class="map-header">
+                    <div class="map-title">Inspection Locations</div>
+                    <div class="chart-actions">
+                        <button><i class="fas fa-layer-group"></i></button>
+                        <button><i class="fas fa-expand"></i></button>
+                        <button><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+                <div class="map-container">
+                   <!-- For the Map - Replace the map-container div in the map-section -->
+<div class="map-container">
+    <svg id="location-map" width="100%" height="400" viewBox="0 0 800 400">
+        <!-- Map background -->
+        <rect x="0" y="0" width="800" height="400" fill="#e8f4f8" />
+        
+        <!-- Grid lines -->
+        <g stroke="#ccc" stroke-width="0.5">
+            <line x1="0" y1="100" x2="800" y2="100" />
+            <line x1="0" y1="200" x2="800" y2="200" />
+            <line x1="0" y1="300" x2="800" y2="300" />
+            <line x1="200" y1="0" x2="200" y2="400" />
+            <line x1="400" y1="0" x2="400" y2="400" />
+            <line x1="600" y1="0" x2="600" y2="400" />
+        </g>
+        
+        <!-- Simplified Map Features -->
+        <path d="M50,100 C150,80 250,150 350,100 S500,40 650,120 L700,220 C650,250 550,230 450,300 S250,350 150,300 L50,250 Z" 
+              fill="#c5e1a5" stroke="#81c784" stroke-width="1" />
+        
+        <path d="M150,200 C200,180 350,220 400,180 S550,150 650,200 L750,320 L700,350 C650,320 500,350 400,300 S250,320 150,280 Z" 
+              fill="#90caf9" stroke="#64b5f6" stroke-width="1" />
+        
+        <!-- Power lines -->
+        <path d="M100,150 L300,120 L500,150 L700,130" 
+              stroke="#555" stroke-width="2" stroke-dasharray="2" fill="none" />
+        <path d="M200,250 L400,220 L600,240" 
+              stroke="#555" stroke-width="2" stroke-dasharray="2" fill="none" />
+        <path d="M150,350 L350,320 L550,340 L750,310" 
+              stroke="#555" stroke-width="2" stroke-dasharray="2" fill="none" />
+        
+        <!-- Normal status inspection points -->
+        <circle cx="100" cy="150" r="8" fill="#4caf50" stroke="#fff" stroke-width="2" />
+        <circle cx="300" cy="120" r="8" fill="#4caf50" stroke="#fff" stroke-width="2" />
+        <circle cx="700" cy="130" r="8" fill="#4caf50" stroke="#fff" stroke-width="2" />
+        <circle cx="200" cy="250" r="8" fill="#4caf50" stroke="#fff" stroke-width="2" />
+        <circle cx="600" cy="240" r="8" fill="#4caf50" stroke="#fff" stroke-width="2" />
+        <circle cx="550" cy="340" r="8" fill="#4caf50" stroke="#fff" stroke-width="2" />
+        
+        <!-- Warning status inspection points -->
+        <circle cx="500" cy="150" r="8" fill="#ffc107" stroke="#fff" stroke-width="2" />
+        <circle cx="400" cy="220" r="8" fill="#ffc107" stroke="#fff" stroke-width="2" />
+        <circle cx="150" cy="350" r="8" fill="#ffc107" stroke="#fff" stroke-width="2" />
+        
+        <!-- Critical status inspection points -->
+        <circle cx="350" cy="320" r="8" fill="#e53935" stroke="#fff" stroke-width="2" />
+        <circle cx="750" cy="310" r="8" fill="#e53935" stroke="#fff" stroke-width="2" />
+        
+        <!-- Substations -->
+        <rect x="95" y="145" width="10" height="10" fill="#fff" stroke="#333" stroke-width="2" />
+        <rect x="395" y="215" width="10" height="10" fill="#fff" stroke="#333" stroke-width="2" />
+        <rect x="695" y="125" width="10" height="10" fill="#fff" stroke="#333" stroke-width="2" />
+        
+        <!-- Compass -->
+        <circle cx="730" cy="70" r="25" fill="white" stroke="#666" stroke-width="1" />
+        <path d="M730,45 L730,95" stroke="#666" stroke-width="1" />
+        <path d="M705,70 L755,70" stroke="#666" stroke-width="1" />
+        <text x="730" y="57" font-size="10" text-anchor="middle">N</text>
+        <text x="730" y="87" font-size="10" text-anchor="middle">S</text>
+        <text x="717" y="73" font-size="10" text-anchor="middle">W</text>
+        <text x="743" y="73" font-size="10" text-anchor="middle">E</text>
+        
+        <!-- Legend -->
+        <rect x="30" y="30" width="140" height="90" fill="white" stroke="#ccc" stroke-width="1" rx="5" />
+        <text x="40" y="50" font-size="12" font-weight="bold">Map Legend</text>
+        
+        <circle cx="50" cy="70" r="6" fill="#4caf50" stroke="#fff" stroke-width="1" />
+        <text x="65" y="74" font-size="11">Normal Status</text>
+        
+        <circle cx="50" cy="90" r="6" fill="#ffc107" stroke="#fff" stroke-width="1" />
+        <text x="65" y="94" font-size="11">Warning Status</text>
+        
+        <circle cx="50" cy="110" r="6" fill="#e53935" stroke="#fff" stroke-width="1" />
+        <text x="65" y="114" font-size="11">Critical Status</text>
+    </svg>
+</div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div>
+                    &copy; 2025 PowerScan Analytics. All rights reserved.
+                </div>
+                <div>
+                    Version 3.2.1
+                </div>
+            </div>
         </div>
-    </footer>
+        
+        <!-- Access Control Modal -->
+        <div id="access-control-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" id="close-modal">&times;</span>
+                <div class="modal-header">
+                    <h2>Access Control Settings</h2>
+                    <p>Manage user permissions and access levels</p>
+                </div>
+                
+                <div class="role-selector">
+                    <div class="role-option active">
+                        <i class="fas fa-user"></i>
+                        <div>Viewer</div>
+                    </div>
+                    <div class="role-option">
+                        <i class="fas fa-user-edit"></i>
+                        <div>Editor</div>
+                    </div>
+                    <div class="role-option">
+                        <i class="fas fa-user-shield"></i>
+                        <div>Admin</div>
+                    </div>
+                </div>
+                
+                <div class="permission-list">
+                    <div class="permission-item">
+                        <div>
+                            <div class="permission-name">View Dashboards</div>
+                            <div class="permission-desc">Access to view analytics dashboards</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="permission-item">
+                        <div>
+                            <div class="permission-name">Export Reports</div>
+                            <div class="permission-desc">Generate and download PDF/Excel reports</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="permission-item">
+                        <div>
+                            <div class="permission-name">Edit Inspections</div>
+                            <div class="permission-desc">Modify inspection data and results</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="permission-item">
+                        <div>
+                            <div class="permission-name">User Management</div>
+                            <div class="permission-desc">Add, modify, or remove user accounts</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="permission-item">
+                        <div>
+                            <div class="permission-name">System Settings</div>
+                            <div class="permission-desc">Modify system configurations</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn btn-outline">Cancel</button>
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
     
-    <script>
-        // Menu Toggle for Mobile
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('nav-links').classList.toggle('active');
-        });
-    </script>
-</body>
-</html>
+        <script>
+            // Toggle sidebar
+            document.getElementById('toggle-sidebar').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('active');
+            });
+            
+            // Modal functionality
+            var modal = document.getElementById('access-control-modal');
+            var openModalBtn = document.getElementById('open-access-modal');
+            var closeModalBtn = document.getElementById('close-modal');
+            
+            openModalBtn.onclick = function() {
+                modal.style.display = "block";
+            }
+            
+            closeModalBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+            
+            // Role selector
+            var roleOptions = document.querySelectorAll('.role-option');
+            roleOptions.forEach(function(option) {
+                option.addEventListener('click', function() {
+                    roleOptions.forEach(function(opt) {
+                        opt.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+        </script>
+    </body>
+    </html>
