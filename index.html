@@ -1,1133 +1,720 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HimalayasTechies - Data Management Platform Proposal</title>
+    <title>Thermal Application Requirements Form</title>
     <style>
-        :root {
-            --primary: #2563eb;
-            --secondary: #0f172a;
-            --accent: #f97316;
-            --light: #f8fafc;
-            --dark: #1e293b;
-            --success: #22c55e;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
         body {
-            background-color: #f8fafc;
-            color: #0f172a;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f5f5f5;
         }
-        
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            background-color: var(--secondary);
-            color: white;
-            padding: 20px 0;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            color: white;
-        }
-        
-        .logo span {
-            color: var(--accent);
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--secondary) 0%, #475569 100%);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 18px;
             max-width: 800px;
             margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
-        section {
-            padding: 60px 0;
-        }
-        
-        h2 {
-            font-size: 32px;
+        h1 {
+            text-align: center;
+            color: #2d5b88;
             margin-bottom: 30px;
-            color: var(--secondary);
-            position: relative;
-            padding-bottom: 15px;
         }
-        
-        h2:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            height: 4px;
-            width: 60px;
-            background-color: var(--accent);
+        h2 {
+            color: #2d5b88;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 10px;
+            margin-top: 30px;
         }
-        
-        h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        p {
+        .form-group {
             margin-bottom: 20px;
         }
-        
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .feature-item {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 25px;
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 36px;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 24px;
+        input[type="text"], 
+        input[type="number"],
+        input[type="email"],
+        textarea, 
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
             border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
-        
-        .btn:hover {
-            background-color: #1d4ed8;
-        }
-        
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 40px auto;
-        }
-        
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background-color: var(--secondary);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-        }
-        
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
+            font-size: 16px;
             box-sizing: border-box;
         }
-        
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -12px;
-            background-color: white;
-            border: 4px solid var(--accent);
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
+        textarea {
+            height: 100px;
+            resize: vertical;
         }
-        
-        .timeline-left {
-            left: 0;
-        }
-        
-        .timeline-right {
-            left: 50%;
-        }
-        
-        .timeline-left::after {
-            right: -13px;
-        }
-        
-        .timeline-right::after {
-            left: -13px;
-        }
-        
-        .timeline-content {
-            padding: 20px 30px;
-            background-color: white;
-            position: relative;
-            border-radius: 6px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .timeline-content h3 {
-            margin-top: 0;
-        }
-        
-        footer {
-            background-color: var(--secondary);
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-direction: column;
+        .checkbox-group label {
+            font-weight: normal;
+            display: inline-flex;
             align-items: center;
+            margin-right: 15px;
+            margin-bottom: 10px;
         }
-        
-        .contact-info {
-            margin-top: 20px;
+        .checkbox-group input {
+            margin-right: 5px;
         }
-        
-        .pricing-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
+        .radio-group label {
+            font-weight: normal;
+            display: block;
+            margin-bottom: 10px;
         }
-        
-        .pricing-table th, .pricing-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+        .radio-group input {
+            margin-right: 5px;
         }
-        
-        .pricing-table th {
-            background-color: var(--secondary);
+        button {
+            background-color: #2d5b88;
             color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: background-color 0.3s;
         }
-        
-        .pricing-table tr:hover {
-            background-color: #f1f5f9;
+        button:hover {
+            background-color: #1e3d5c;
         }
-        
-        .checkmark {
-            color: var(--success);
-            font-weight: bold;
-        }
-        
-        .highlight {
-            background-color: #fffbeb;
-            border-left: 4px solid var(--accent);
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .mockup-container {
-            margin: 30px 0;
-            text-align: center;
-        }
-        
-        .mockup-image {
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 15px;
-        }
-        
-        .mockup-caption {
-            font-style: italic;
-            color: #64748b;
-            margin-top: 10px;
-        }
-        
-        .mockup-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-            gap: 30px;
+        .section-divider {
+            height: 2px;
+            background-color: #eaeaea;
             margin: 40px 0;
-        }
-        
-        @media (max-width: 768px) {
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-right {
-                left: 0;
-            }
-            
-            .timeline-left::after, .timeline-right::after {
-                left: 15px;
-            }
-            
-            .mockup-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container logo-container">
-            <div class="logo">Himalayas<span>Techies</span></div>
-            <div>April 9, 2025</div>
-        </div>
-    </header>
-    
-    <section class="hero">
-        <div class="container">
-            <h1>Advanced Data Management Platform Proposal</h1>
-            <p>A comprehensive solution for seamless data visualization, analysis, and management with enhanced security and accessibility features</p>
-        </div>
-    </section>
-    
-    <section>
-        <div class="container">
-            <h2>Executive Summary</h2>
-            <div class="card">
-                <p>HimalayasTechies is pleased to present this proposal for the development of a sophisticated Data Management Platform tailored to your specific requirements. We understand your need for a web-based system that integrates with your existing software solution while providing enhanced data visualization, analysis, and reporting capabilities.</p>
-                
-                <p>Based on your requirements, we propose developing a secure, scalable web platform that will enable:</p>
-                <ul style="margin-left: 20px; margin-bottom: 20px;">
-                    <li>Seamless access to your image repositories and databases</li>
-                    <li>Integration with Power BI for advanced analytics</li>
-                    <li>Comprehensive data visualization including map information and KML viewing</li>
-                    <li>PDF report generation and document management</li>
-                    <li>Role-based access control with multiple permission levels</li>
-                    <li>Integration with FLIR Atlas SDK and Flir Spinnaker SDK</li>
-                    <li>Advanced image data analysis capabilities</li>
-                    <li>Robust data backup and security protocols</li>
-                </ul>
-                
-                <p>Our team of experienced developers, data scientists, and UX specialists will deliver a state-of-the-art platform that not only meets your current requirements but is also designed for future scalability and integration possibilities.</p>
-                
-                <div class="mockup-container">
-                    <svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Background -->
-                        <rect width="900" height="700" fill="#f5f5f5" />
-                        
-                        <!-- Title -->
-                        <text x="450" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">Data Management Platform Architecture</text>
-                        
-                        <!-- Client Layer -->
-                        <rect x="50" y="80" width="800" height="100" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" rx="8" />
-                        <text x="450" y="105" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#1565c0">Client Layer</text>
-                        
-                        <!-- Client Components -->
-                        <rect x="100" y="125" width="150" height="40" fill="#bbdefb" stroke="#2196f3" stroke-width="1.5" rx="5" />
-                        <text x="175" y="150" font-family="Arial" font-size="14" text-anchor="middle">Web Browser</text>
-                        
-                        <rect x="275" y="125" width="150" height="40" fill="#bbdefb" stroke="#2196f3" stroke-width="1.5" rx="5" />
-                        <text x="350" y="150" font-family="Arial" font-size="14" text-anchor="middle">Mobile App</text>
-                        
-                        <rect x="450" y="125" width="150" height="40" fill="#bbdefb" stroke="#2196f3" stroke-width="1.5" rx="5" />
-                        <text x="525" y="150" font-family="Arial" font-size="14" text-anchor="middle">Desktop Client</text>
-                        
-                        <rect x="625" y="125" width="150" height="40" fill="#bbdefb" stroke="#2196f3" stroke-width="1.5" rx="5" />
-                        <text x="700" y="150" font-family="Arial" font-size="14" text-anchor="middle">API Consumers</text>
-                        
-                        <!-- Application Layer -->
-                        <rect x="50" y="200" width="800" height="180" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" rx="8" />
-                        <text x="450" y="225" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#2e7d32">Application Layer</text>
-                        
-                        <!-- Application Components -->
-                        <rect x="80" y="245" width="160" height="50" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5" rx="5" />
-                        <text x="160" y="275" font-family="Arial" font-size="14" text-anchor="middle">User Authentication</text>
-                        
-                        <rect x="260" y="245" width="160" height="50" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5" rx="5" />
-                        <text x="340" y="275" font-family="Arial" font-size="14" text-anchor="middle">Access Control System</text>
-                        
-                        <rect x="440" y="245" width="160" height="50" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5" rx="5" />
-                        <text x="520" y="275" font-family="Arial" font-size="14" text-anchor="middle">Web API Gateway</text>
-                        
-                        <rect x="620" y="245" width="160" height="50" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5" rx="5" />
-                        <text x="700" y="275" font-family="Arial" font-size="14" text-anchor="middle">Load Balancer</text>
-                        
-                        <rect x="80" y="315" width="160" height="50" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5" rx="5" />
-                        <text x="160" y="345" font-family="Arial" font-size="14" text-anchor="middle">PDF Generator</text>
-                        
-                        <rect x="260" y="315" width="160" height="50" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5" rx="5" />
-                        <text x="340" y="345" font-family="Arial" font-size="14" text-anchor="middle">KML Viewer</text>
-                        
-                        <rect x="440" y="315" width="160" height="50" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5" rx="5" />
-                        <text x="520" y="345" font-family="Arial" font-size="14" text-anchor="middle">Power BI Integration</text>
-                        
-                        <rect x="620" y="315" width="160" height="50" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5" rx="5" />
-                        <text x="700" y="345" font-family="Arial" font-size="14" text-anchor="middle">Data Upload Service</text>
-                        
-                        <!-- Service Layer -->
-                        <rect x="50" y="400" width="800" height="120" fill="#fff3e0" stroke="#ef6c00" stroke-width="2" rx="8" />
-                        <text x="450" y="425" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#e65100">Service Layer</text>
-                        
-                        <!-- Service Components -->
-                        <rect x="80" y="450" width="140" height="50" fill="#ffe0b2" stroke="#ff9800" stroke-width="1.5" rx="5" />
-                        <text x="150" y="480" font-family="Arial" font-size="14" text-anchor="middle">FLIR Atlas SDK</text>
-                        
-                        <rect x="240" y="450" width="140" height="50" fill="#ffe0b2" stroke="#ff9800" stroke-width="1.5" rx="5" />
-                        <text x="310" y="480" font-family="Arial" font-size="14" text-anchor="middle">FLIR Spinnaker SDK</text>
-                        
-                        <rect x="400" y="450" width="140" height="50" fill="#ffe0b2" stroke="#ff9800" stroke-width="1.5" rx="5" />
-                        <text x="470" y="480" font-family="Arial" font-size="14" text-anchor="middle">Image Processing</text>
-                        
-                        <rect x="560" y="450" width="140" height="50" fill="#ffe0b2" stroke="#ff9800" stroke-width="1.5" rx="5" />
-                        <text x="630" y="480" font-family="Arial" font-size="14" text-anchor="middle">Data Analysis</text>
-                        
-                        <rect x="720" y="450" width="110" height="50" fill="#ffe0b2" stroke="#ff9800" stroke-width="1.5" rx="5" />
-                        <text x="775" y="480" font-family="Arial" font-size="14" text-anchor="middle">Map Service</text>
-                        
-                        <!-- Data Layer -->
-                        <rect x="50" y="540" width="800" height="120" fill="#e8eaf6" stroke="#3949ab" stroke-width="2" rx="8" />
-                        <text x="450" y="565" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#303f9f">Data Layer</text>
-                        
-                        <!-- Data Components -->
-                        <rect x="80" y="590" width="140" height="50" fill="#c5cae9" stroke="#5c6bc0" stroke-width="1.5" rx="5" />
-                        <text x="150" y="620" font-family="Arial" font-size="14" text-anchor="middle">User Database</text>
-                        
-                        <rect x="240" y="590" width="140" height="50" fill="#c5cae9" stroke="#5c6bc0" stroke-width="1.5" rx="5" />
-                        <text x="310" y="620" font-family="Arial" font-size="14" text-anchor="middle">Image Storage</text>
-                        
-                        <rect x="400" y="590" width="140" height="50" fill="#c5cae9" stroke="#5c6bc0" stroke-width="1.5" rx="5" />
-                        <text x="470" y="620" font-family="Arial" font-size="14" text-anchor="middle">Analytics Database</text>
-                        
-                        <rect x="560" y="590" width="140" height="50" fill="#c5cae9" stroke="#5c6bc0" stroke-width="1.5" rx="5" />
-                        <text x="630" y="620" font-family="Arial" font-size="14" text-anchor="middle">Map Data Storage</text>
-                        
-                        <rect x="720" y="590" width="110" height="50" fill="#c5cae9" stroke="#5c6bc0" stroke-width="1.5" rx="5" />
-                        <text x="775" y="620" font-family="Arial" font-size="14" text-anchor="middle">Backup System</text>
-                        
-                        <!-- Data Flow Arrows -->
-                        <!-- Client to Application -->
-                        <path d="M175,165 L175,245" stroke="#1976d2" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="175,245 170,235 180,235" fill="#1976d2" />
-                        
-                        <path d="M350,165 L350,245" stroke="#1976d2" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="350,245 345,235 355,235" fill="#1976d2" />
-                        
-                        <path d="M525,165 L525,245" stroke="#1976d2" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="525,245 520,235 530,235" fill="#1976d2" />
-                        
-                        <path d="M700,165 L700,245" stroke="#1976d2" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="700,245 695,235 705,235" fill="#1976d2" />
-                        
-                        <!-- Application to Service -->
-                        <path d="M160,365 L160,450" stroke="#388e3c" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="160,450 155,440 165,440" fill="#388e3c" />
-                        
-                        <path d="M340,365 L340,450" stroke="#388e3c" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="340,450 335,440 345,440" fill="#388e3c" />
-                        
-                        <path d="M520,365 L520,450" stroke="#388e3c" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="520,450 515,440 525,440" fill="#388e3c" />
-                        
-                        <path d="M700,365 L700,450" stroke="#388e3c" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="700,450 695,440 705,440" fill="#388e3c" />
-                        
-                        <!-- Service to Data -->
-                        <path d="M150,500 L150,590" stroke="#ef6c00" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="150,590 145,580 155,580" fill="#ef6c00" />
-                        
-                        <path d="M310,500 L310,590" stroke="#ef6c00" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="310,590 305,580 315,580" fill="#ef6c00" />
-                        
-                        <path d="M470,500 L470,590" stroke="#ef6c00" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="470,590 465,580 475,580" fill="#ef6c00" />
-                        
-                        <path d="M630,500 L630,590" stroke="#ef6c00" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="630,590 625,580 635,580" fill="#ef6c00" />
-                        
-                        <path d="M775,500 L775,590" stroke="#ef6c00" stroke-width="2" fill="none" stroke-dasharray="5,3" />
-                        <polygon points="775,590 770,580 780,580" fill="#ef6c00" />
-                        
-                        <!-- User Access Levels Legend -->
-                        <rect x="50" y="670" width="800" height="30" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="1" rx="5" />
-                        <text x="450" y="690" font-family="Arial" font-size="14" text-anchor="middle">
-                          Access Levels: Manager Access | Major Access | Admin Access
-                        </text>
-                      </svg>
-                    <div class="mockup-caption">Overview of the proposed data management platform architecture</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section style="background-color: #f1f5f9;">
-        <div class="container">
-            <h2>Understanding Your Requirements</h2>
-            <div class="card">
-                <h3>Current Situation</h3>
-                <p>You currently have a functional software system that manages your data, but you need a web platform that provides online access to this data with enhanced visualization and management capabilities. The platform needs to integrate with your existing systems seamlessly while adding new functionalities.</p>
-                
-                <h3>Key Requirements Identified</h3>
-                <div class="highlight">
-                    <p><strong>1. Online Access Feature Integration</strong><br>
-                    Adding web-based access to your existing software system, allowing authorized users to interact with your data from anywhere.</p>
-                </div>
-                
-                <div class="highlight">
-                    <p><strong>2. Comprehensive Data Interaction</strong><br>
-                    Enabling viewing, editing, sharing, PDF report generation, Power BI integration, filtering capabilities, and KML viewer functionality.</p>
-                </div>
-                
-                <div class="highlight">
-                    <p><strong>3. SDK Integration</strong><br>
-                    Implementing FLIR Atlas SDK and Flir Spinnaker SDK for advanced thermal imaging analysis and camera control.</p>
-                </div>
-                
-                <div class="highlight">
-                    <p><strong>4. Multi-level Access Control</strong><br>
-                    Creating a hierarchical access system with manager access, major access, and admin access levels to ensure proper data governance.</p>
-                </div>
-                
-                <div class="highlight">
-                    <p><strong>5. Data Security and Backup</strong><br>
-                    Implementing robust backup solutions and comprehensive access control mechanisms to protect your valuable data.</p>
-                </div>
-                
-                <div class="highlight">
-                    <p><strong>6. Advanced Analytics Dashboard</strong><br>
-                    Developing a detailed, interactive analytics dashboard that provides comprehensive insights into your data.</p>
-                </div>
-                
-                <div class="mockup-container">
-                    <img src="/Screenshot (313).png" alt="Current vs Proposed System" class="mockup-image">
-                    <div class="mockup-caption">Comparison between current system capabilities and proposed platform enhancements</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section>
-        <div class="container">
-            <h2>Our Proposed Solution</h2>
-            <p>Based on your requirements, we propose developing a comprehensive Data Management Platform with the following key components:</p>
+    <div class="container">
+        <h1>Thermal Application Requirements Form</h1>
+        
+        <form id="requirementsForm">
+            <!-- General Project Scope -->
+            <h2>A. General Project Scope</h2>
             
-            <div class="mockup-grid">
-                <div class="mockup-container">
-                    <img src="/Screenshot (315).png" alt="Login Screen Mockup" class="mockup-image">
-                    <div class="mockup-caption">Secure login screen with multi-factor authentication</div>
+            <div class="form-group">
+                <label for="mainPurpose">1. What is the main purpose of this web application?</label>
+                <textarea id="mainPurpose" name="mainPurpose" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="intendedUsers">2. Who are the intended users?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="users" value="engineers"> Engineers</label>
+                    <label><input type="checkbox" name="users" value="fieldAgents"> Field Agents</label>
+                    <label><input type="checkbox" name="users" value="managers"> Managers</label>
+                    <label><input type="checkbox" name="users" value="clients"> Clients</label>
+                    <label><input type="checkbox" name="users" value="other"> Other</label>
                 </div>
-                
-                <div class="mockup-container">
-                    <img src="/Screenshot (318).png" alt="Dashboard Mockup" class="mockup-image">
-                    <div class="mockup-caption">Executive dashboard with key metrics and visualizations</div>
+                <input type="text" id="otherUsers" name="otherUsers" placeholder="Please specify other users">
+            </div>
+            
+            <div class="form-group">
+                <label>3. What devices will be used to access the app?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="devices" value="pc"> PC</label>
+                    <label><input type="checkbox" name="devices" value="tablet"> Tablet</label>
+                    <label><input type="checkbox" name="devices" value="mobile"> Mobile</label>
+                    <label><input type="checkbox" name="devices" value="other"> Other</label>
                 </div>
-                
-                <div class="mockup-container">
-                    <img src="/Screenshot (316).png" alt="Data Visualization Mockup" class="mockup-image">
-                    <div class="mockup-caption">Advanced data visualization tools with filtering capabilities</div>
-                </div>
-                
-                <div class="mockup-container">
-                    <img src="/WhatsApp Image 2025-04-09 at 7.56.28 AM.jpeg" alt="Report Generator Mockup" class="mockup-image">
-                    <div class="mockup-caption">Custom PDF report generator with template system</div>
+                <input type="text" id="otherDevices" name="otherDevices" placeholder="Please specify other devices">
+            </div>
+            
+            <div class="form-group">
+                <label>4. Is this app internal only, or will external users have access too?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="accessType" value="internal" required> Internal only</label>
+                    <label><input type="radio" name="accessType" value="external"> External users will have access</label>
+                    <label><input type="radio" name="accessType" value="both"> Both internal and external users</label>
                 </div>
             </div>
             
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <h3>Web-Based Interface</h3>
-                    <p>A responsive, intuitive web interface that provides seamless access to your data from any device with appropriate credentials. The interface will be designed with modern UX principles to ensure ease of use and efficiency.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Data Visualization Hub</h3>
-                    <p>Interactive dashboards with integrated Power BI components, allowing for deep analysis of your data through charts, graphs, and other visualization tools. The system will support both predefined and custom visualizations.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Geospatial Analysis</h3>
-                    <p>Advanced mapping capabilities with KML viewer integration, enabling spatial data visualization and analysis. Users can overlay various data points on maps for geographic context and insights.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Image Management System</h3>
-                    <p>Comprehensive image repository with advanced search, tagging, and organization features. Integration with FLIR SDKs will enable specialized thermal image analysis and processing.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Report Generation Engine</h3>
-                    <p>Flexible PDF report generation system with customizable templates and real-time data integration. Reports can be scheduled, generated on-demand, and distributed automatically.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Role-Based Access Control</h3>
-                    <p>Sophisticated permission system with customizable roles (Admin, Manager, Major) allowing granular control over who can view, edit, or share specific data sets within the platform.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Data Import/Export Tools</h3>
-                    <p>Robust tools for importing external data in various formats and exporting processed data for use in other systems. Automated validation ensures data integrity during transfers.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Backup & Recovery System</h3>
-                    <p>Automated backup solutions with configurable schedules, retention policies, and quick recovery options to ensure data safety and business continuity.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>API Integration Layer</h3>
-                    <p>Flexible API architecture allowing seamless integration with your existing software and potential future systems. This ensures your platform remains extensible and adaptable.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section style="background-color: #f1f5f9;">
-        <div class="container">
-            <h2>Technical Approach</h2>
-            <div class="card">
-                <h3>Architecture Overview</h3>
-                <p>We propose a modern, scalable architecture built on the following principles:</p>
-                
-                <ul style="margin-left: 20px; margin-bottom: 20px;">
-                    <li><strong>Microservices Architecture:</strong> For flexibility, scalability, and maintainability</li>
-                    <li><strong>RESTful API Design:</strong> For seamless integration with existing systems</li>
-                    <li><strong>Responsive Frontend:</strong> Built with React for optimal performance across devices</li>
-                    <li><strong>Secure Backend:</strong> Utilizing Node.js and Express for robust API handling</li>
-                    <li><strong>Database Strategy:</strong> Combination of SQL for structured data and NoSQL for unstructured data</li>
-                    <li><strong>Cloud Infrastructure:</strong> Deployed on AWS/Azure for reliability and scalability</li>
-                </ul>
-                
-                <div class="mockup-container">
-                    
-                    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Background and Title -->
-                        <rect width="800" height="600" fill="#f8f9fa" />
-                        <text x="400" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">Data Management Platform Architecture</text>
-                        
-                        <!-- Client Layer -->
-                        <rect x="50" y="80" width="700" height="80" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="5" />
-                        <text x="400" y="105" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">Client Layer</text>
-                        
-                        <rect x="100" y="120" width="120" height="30" fill="#bbdefb" stroke="#1e88e5" stroke-width="1" rx="3" />
-                        <text x="160" y="140" font-family="Arial" font-size="12" text-anchor="middle">Web Browser</text>
-                        
-                        <rect x="240" y="120" width="120" height="30" fill="#bbdefb" stroke="#1e88e5" stroke-width="1" rx="3" />
-                        <text x="300" y="140" font-family="Arial" font-size="12" text-anchor="middle">Mobile App</text>
-                        
-                        <rect x="380" y="120" width="120" height="30" fill="#bbdefb" stroke="#1e88e5" stroke-width="1" rx="3" />
-                        <text x="440" y="140" font-family="Arial" font-size="12" text-anchor="middle">Desktop Client</text>
-                        
-                        <rect x="520" y="120" width="120" height="30" fill="#bbdefb" stroke="#1e88e5" stroke-width="1" rx="3" />
-                        <text x="580" y="140" font-family="Arial" font-size="12" text-anchor="middle">API Consumers</text>
-                      
-                        <!-- Application Layer -->
-                        <rect x="50" y="180" width="700" height="140" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="5" />
-                        <text x="400" y="205" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">Application Layer</text>
-                        
-                        <rect x="80" y="220" width="140" height="40" fill="#c8e6c9" stroke="#43a047" stroke-width="1" rx="3" />
-                        <text x="150" y="245" font-family="Arial" font-size="12" text-anchor="middle">User Authentication</text>
-                        
-                        <rect x="230" y="220" width="140" height="40" fill="#c8e6c9" stroke="#43a047" stroke-width="1" rx="3" />
-                        <text x="300" y="245" font-family="Arial" font-size="12" text-anchor="middle">Access Control</text>
-                        
-                        <rect x="380" y="220" width="140" height="40" fill="#c8e6c9" stroke="#43a047" stroke-width="1" rx="3" />
-                        <text x="450" y="245" font-family="Arial" font-size="12" text-anchor="middle">Web API Gateway</text>
-                        
-                        <rect x="530" y="220" width="140" height="40" fill="#c8e6c9" stroke="#43a047" stroke-width="1" rx="3" />
-                        <text x="600" y="245" font-family="Arial" font-size="12" text-anchor="middle">Load Balancer</text>
-                        
-                        <rect x="80" y="270" width="140" height="40" fill="#c8e6c9" stroke="#43a047" stroke-width="1" rx="3" />
-                        <text x="150" y="295" font-family="Arial" font-size="12" text-anchor="middle">PDF Generator</text>
-                        
-                        <rect x="230" y="270" width="140" height="40" fill="#c8e6c9" stroke="#43a047" stroke-width="1" rx="3" />
-                        <text x="300" y="295" font-family="Arial" font-size="12" text-anchor="middle">KML Viewer</text>
-                        
-                        <rect x="380" y="270" width="140" height="40" fill="#c8e6c9" stroke="#43a047" stroke-width="1" rx="3" />
-                        <text x="450" y="295" font-family="Arial" font-size="12" text-anchor="middle">Power BI Embed</text>
-                        
-                        <rect x="530" y="270" width="140" height="40" fill="#c8e6c9" stroke="#43a047" stroke-width="1" rx="3" />
-                        <text x="600" y="295" font-family="Arial" font-size="12" text-anchor="middle">Data Upload Service</text>
-                        
-                        <!-- Service Layer -->
-                        <rect x="50" y="340" width="700" height="100" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="5" />
-                        <text x="400" y="365" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">Service Layer</text>
-                        
-                        <rect x="80" y="380" width="120" height="50" fill="#ffe0b2" stroke="#fb8c00" stroke-width="1" rx="3" />
-                        <text x="140" y="410" font-family="Arial" font-size="12" text-anchor="middle">FLIR Atlas SDK</text>
-                        
-                        <rect x="210" y="380" width="120" height="50" fill="#ffe0b2" stroke="#fb8c00" stroke-width="1" rx="3" />
-                        <text x="270" y="410" font-family="Arial" font-size="12" text-anchor="middle">FLIR Spinnaker SDK</text>
-                        
-                        <rect x="340" y="380" width="120" height="50" fill="#ffe0b2" stroke="#fb8c00" stroke-width="1" rx="3" />
-                        <text x="400" y="410" font-family="Arial" font-size="12" text-anchor="middle">Image Processing</text>
-                        
-                        <rect x="470" y="380" width="120" height="50" fill="#ffe0b2" stroke="#fb8c00" stroke-width="1" rx="3" />
-                        <text x="530" y="410" font-family="Arial" font-size="12" text-anchor="middle">Data Analysis</text>
-                        
-                        <rect x="600" y="380" width="120" height="50" fill="#ffe0b2" stroke="#fb8c00" stroke-width="1" rx="3" />
-                        <text x="660" y="410" font-family="Arial" font-size="12" text-anchor="middle">Map Service</text>
-                        
-                        <!-- Data Layer -->
-                        <rect x="50" y="460" width="700" height="100" fill="#e1f5fe" stroke="#03a9f4" stroke-width="2" rx="5" />
-                        <text x="400" y="485" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">Data Layer</text>
-                        
-                        <rect x="80" y="500" width="120" height="50" fill="#b3e5fc" stroke="#039be5" stroke-width="1" rx="3" />
-                        <text x="140" y="530" font-family="Arial" font-size="12" text-anchor="middle">User Database</text>
-                        
-                        <rect x="210" y="500" width="120" height="50" fill="#b3e5fc" stroke="#039be5" stroke-width="1" rx="3" />
-                        <text x="270" y="530" font-family="Arial" font-size="12" text-anchor="middle">Image Storage</text>
-                        
-                        <rect x="340" y="500" width="120" height="50" fill="#b3e5fc" stroke="#039be5" stroke-width="1" rx="3" />
-                        <text x="400" y="530" font-family="Arial" font-size="12" text-anchor="middle">Analytics DB</text>
-                        
-                        <rect x="470" y="500" width="120" height="50" fill="#b3e5fc" stroke="#039be5" stroke-width="1" rx="3" />
-                        <text x="530" y="530" font-family="Arial" font-size="12" text-anchor="middle">Map Data</text>
-                        
-                        <rect x="600" y="500" width="120" height="50" fill="#b3e5fc" stroke="#039be5" stroke-width="1" rx="3" />
-                        <text x="660" y="530" font-family="Arial" font-size="12" text-anchor="middle">Backup System</text>
-                        
-                        <!-- Data Flow Arrows -->
-                        <!-- Client to Application -->
-                        <line x1="160" y1="150" x2="160" y2="180" stroke="#1565c0" stroke-width="2" stroke-dasharray="5,3" />
-                        <line x1="300" y1="150" x2="300" y2="180" stroke="#1565c0" stroke-width="2" stroke-dasharray="5,3" />
-                        <line x1="440" y1="150" x2="440" y2="180" stroke="#1565c0" stroke-width="2" stroke-dasharray="5,3" />
-                        <line x1="580" y1="150" x2="580" y2="180" stroke="#1565c0" stroke-width="2" stroke-dasharray="5,3" />
-                        
-                        <!-- Application to Service -->
-                        <line x1="140" y1="310" x2="140" y2="340" stroke="#1b5e20" stroke-width="2" stroke-dasharray="5,3" />
-                        <line x1="300" y1="310" x2="300" y2="340" stroke="#1b5e20" stroke-width="2" stroke-dasharray="5,3" />
-                        <line x1="450" y1="310" x2="450" y2="340" stroke="#1b5e20" stroke-width="2" stroke-dasharray="5,3" />
-                        <line x1="600" y1="310" x2="600" y2="340" stroke="#1b5e20" stroke-width="2" stroke-dasharray="5,3" />
-                        
-                        <!-- Service to Data -->
-                        <line x1="140" y1="430" x2="140" y2="460" stroke="#e65100" stroke-width="2" stroke-dasharray="5,3" />
-                        <line x1="270" y1="430" x2="270" y2="460" stroke="#e65100" stroke-width="2" stroke-dasharray="5,3" />
-                        <line x1="400" y1="430" x2="400" y2="460" stroke="#e65100" stroke-width="2" stroke-dasharray="5,3" />
-                        <line x1="530" y1="430" x2="530" y2="460" stroke="#e65100" stroke-width="2" stroke-dasharray="5,3" />
-                        <line x1="660" y1="430" x2="660" y2="460" stroke="#e65100" stroke-width="2" stroke-dasharray="5,3" />
-                      </svg>
-                    <div class="mockup-caption">Proposed system architecture diagram showing key components and data flow</div>
-                </div>
-                
-                <h3>Key Technologies</h3>
-                <p>Our solution will leverage the following technologies:</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
-                    <div>
-                        <strong>Frontend</strong>
-                        <ul style="margin-left: 20px;">
-                            <li>React.js</li>
-                            <li>Redux</li>
-                            <li>Material UI</li>
-                            <li>D3.js for visualizations</li>
-                            <li>Leaflet for maps</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <strong>Backend</strong>
-                        <ul style="margin-left: 20px;">
-                            <li>Node.js</li>
-                            <li>Express</li>
-                            <li>GraphQL</li>
-                            <li>JWT authentication</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <strong>Database</strong>
-                        <ul style="margin-left: 20px;">
-                            <li>PostgreSQL</li>
-                            <li>MongoDB</li>
-                            <li>Redis for caching</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <strong>Integration</strong>
-                        <ul style="margin-left: 20px;">
-                            <li>Power BI Embedded</li>
-                            <li>FLIR Atlas SDK</li>
-                            <li>Flir Spinnaker SDK</li>
-                            <li>KML parsing libraries</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <h3>FLIR SDK Integration</h3>
-                <p>We will implement both the FLIR Atlas SDK and Flir Spinnaker SDK to provide comprehensive thermal imaging capabilities:</p>
-                
-                <ul style="margin-left: 20px; margin-bottom: 20px;">
-                    <li><strong>FLIR Atlas SDK:</strong> For thermal image analysis, measurement tools, and reporting</li>
-                    <li><strong>Flir Spinnaker SDK:</strong> For camera control, image acquisition, and real-time processing</li>
-                </ul>
-                
-                <div class="mockup-container">
-                    <img src="/infratec-thermography-irbis-software-overview-images-en.webp" alt="FLIR Integration Example" class="mockup-image">
-                    <div class="mockup-caption">Example of thermal imaging analysis capabilities with FLIR SDK integration</div>
-                </div>
-                
-                <p>Our team includes specialists with experience in thermal imaging technology who will ensure optimal integration of these SDKs within the platform.</p>
-            </div>
-        </div>
-    </section>
-    
-    <section>
-        <div class="container">
-            <h2>Dashboard & Analytics Features</h2>
-            <p>The heart of your platform will be an advanced analytics dashboard with the following capabilities:</p>
-            
-            <div class="mockup-container">
-                <img src="/Screenshot (313).png" alt="Analytics Dashboard" class="mockup-image">
-                <div class="mockup-caption">Comprehensive analytics dashboard with real-time monitoring and interactive filters</div>
+            <div class="form-group">
+                <label for="userCount">5. What is the expected number of users (approx.)?</label>
+                <input type="number" id="userCount" name="userCount" min="1" required>
             </div>
             
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <h3>Executive Dashboard</h3>
-                    <p>A high-level overview dashboard presenting key metrics, trends, and alerts. Customizable widgets allow users to configure their view based on their specific needs and priorities.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Power BI Integration</h3>
-                    <p>Seamless embedding of Power BI reports and dashboards within the platform, allowing for advanced data analysis while maintaining consistent user experience and security controls.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Real-time Monitoring</h3>
-                    <p>Live data streams with configurable alerts and notifications based on predefined thresholds or anomaly detection algorithms that identify unusual patterns.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Advanced Filtering</h3>
-                    <p>Multi-dimensional filtering capabilities allowing users to slice and dice data across various parameters simultaneously for targeted analysis and insight discovery.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Image Analysis Tools</h3>
-                    <p>Specialized tools for analyzing image data, including thermal pattern recognition, anomaly detection, and comparative analysis across image sets.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Trend Analysis</h3>
-                    <p>Historical data visualization with trend identification, seasonality analysis, and forecasting capabilities to help predict future patterns and needs.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Custom Report Builder</h3>
-                    <p>Drag-and-drop interface for creating custom reports combining various data sources, visualizations, and textual elements into cohesive PDF documents.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Geospatial Analytics</h3>
-                    <p>Map-based visualizations with heat maps, clustering, and route analysis capabilities, enabling geographical pattern recognition and location-based insights.</p>
+            <div class="section-divider"></div>
+            
+            <!-- Image & Camera Requirements -->
+            <h2>B. Image & Camera Requirements</h2>
+            
+            <div class="form-group">
+                <label>6. Will users only upload existing thermal images, or should the app support capturing images from FLIR cameras?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="imageCapture" value="upload" required> Upload only</label>
+                    <label><input type="radio" name="imageCapture" value="capture"> Capture support</label>
+                    <label><input type="radio" name="imageCapture" value="both"> Both upload and capture</label>
                 </div>
             </div>
             
-            <div class="mockup-grid">
-                <div class="mockup-container">
-                    <img src="/0200000C.jpg" alt="Data Filtering UI" class="mockup-image">
-                    <div class="mockup-caption">Advanced multi-dimensional filtering interface</div>
+            <div class="form-group">
+                <label>7. What types of image files will be uploaded?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="imageTypes" value="jpg"> .jpg</label>
+                    <label><input type="checkbox" name="imageTypes" value="rjpeg"> .rjpeg</label>
+                    <label><input type="checkbox" name="imageTypes" value="seq"> .seq</label>
+                    <label><input type="checkbox" name="imageTypes" value="other"> Other</label>
                 </div>
-                
-                <div class="mockup-container">
-                    <img src="/Screenshot (319).png" alt="Geospatial Analysis" class="mockup-image">
-                    <div class="mockup-caption">Geospatial analysis with KML viewer integration</div>
+                <input type="text" id="otherImageTypes" name="otherImageTypes" placeholder="Please specify other image types">
+            </div>
+            
+            <div class="form-group">
+                <label>8. Do you want to extract temperature data from these thermal images automatically?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="extractTemp" value="yes" required> Yes</label>
+                    <label><input type="radio" name="extractTemp" value="no"> No</label>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <section style="background-color: #f1f5f9;">
-        <div class="container">
-            <h2>Security & Access Control</h2>
-            <div class="card">
-                <h3>Role-Based Access Control</h3>
-                <p>We will implement a comprehensive role-based access control system with three primary tiers:</p>
-                
-                <div class="mockup-container">
-                    <img src="/images.jpg" alt="Access Control System" class="mockup-image">
-                    <div class="mockup-caption">Role-based access control management interface</div>
+            
+            <div class="form-group">
+                <label>9. Is the use of the FLIR Spinnaker SDK (for real-time camera control) required in this application?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="spinnaker" value="yes" required> Yes</label>
+                    <label><input type="radio" name="spinnaker" value="no"> No</label>
+                    <label><input type="radio" name="spinnaker" value="maybe"> Not sure</label>
                 </div>
-                
-                <table class="pricing-table">
-                    <tr>
-                        <th>Access Level</th>
-                        <th>Capabilities</th>
-                        <th>Typical Users</th>
+            </div>
+            
+            <div class="form-group">
+                <label>10. Are users uploading just images, or videos as well?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="mediaType" value="images" required> Images only</label>
+                    <label><input type="radio" name="mediaType" value="videos"> Videos only</label>
+                    <label><input type="radio" name="mediaType" value="both"> Both images and videos</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>11. Should image processing be automatic on upload, or on-demand?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="processingType" value="automatic" required> Automatic on upload</label>
+                    <label><input type="radio" name="processingType" value="onDemand"> On-demand</label>
+                    <label><input type="radio" name="processingType" value="both"> Both options</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>12. Should we annotate the image with temperature zones, points, etc.?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="annotation" value="yes" required> Yes</label>
+                    <label><input type="radio" name="annotation" value="no"> No</label>
+                </div>
+                <textarea id="annotationDetails" name="annotationDetails" placeholder="If yes, please provide details on the type of annotations needed"></textarea>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <!-- Report Management -->
+            <h2>C. Report Management</h2>
+            
+            <div class="form-group">
+                <label>13. What types of reports should users be able to upload?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="reportTypes" value="excel"> Excel</label>
+                    <label><input type="checkbox" name="reportTypes" value="kml"> KML</label>
+                    <label><input type="checkbox" name="reportTypes" value="pdf"> PDF</label>
+                    <label><input type="checkbox" name="reportTypes" value="other"> Other</label>
+                </div>
+                <input type="text" id="otherReportTypes" name="otherReportTypes" placeholder="Please specify other report types">
+            </div>
+            
+            <div class="form-group">
+                <label for="reportData">14. What kind of data is typically stored in these Excel/KML files?</label>
+                <textarea id="reportData" name="reportData"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>15. Should we visualize KML data on a map (e.g., Google Maps)?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="kmlVisualize" value="yes" required> Yes</label>
+                    <label><input type="radio" name="kmlVisualize" value="no"> No</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>16. Do you want to extract any charts, graphs, or tables from the Excel files?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="excelExtract" value="yes" required> Yes</label>
+                    <label><input type="radio" name="excelExtract" value="no"> No</label>
+                </div>
+                <textarea id="excelExtractDetails" name="excelExtractDetails" placeholder="If yes, please provide details on what should be extracted"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>17. Should users be able to filter reports by date, location, user, etc.?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="reportFilters" value="yes" required> Yes</label>
+                    <label><input type="radio" name="reportFilters" value="no"> No</label>
+                </div>
+                <div class="checkbox-group" id="filterOptions" style="margin-top: 10px;">
+                    <label><input type="checkbox" name="filterBy" value="date"> Date</label>
+                    <label><input type="checkbox" name="filterBy" value="location"> Location</label>
+                    <label><input type="checkbox" name="filterBy" value="user"> User</label>
+                    <label><input type="checkbox" name="filterBy" value="other"> Other</label>
+                </div>
+                <input type="text" id="otherFilters" name="otherFilters" placeholder="Please specify other filters">
+            </div>
+            
+            <div class="form-group">
+                <label>18. Do reports need approval/verification workflow?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="approvalWorkflow" value="yes" required> Yes</label>
+                    <label><input type="radio" name="approvalWorkflow" value="no"> No</label>
+                </div>
+                <textarea id="workflowDetails" name="workflowDetails" placeholder="If yes, please describe the approval workflow needed"></textarea>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <!-- User Roles and Access Control -->
+            <h2>D. User Roles and Access Control</h2>
+            
+            <div class="form-group">
+                <label for="userRoles">19. What are the exact roles in the system?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="roles" value="admin"> Admin</label>
+                    <label><input type="checkbox" name="roles" value="major"> Major</label>
+                    <label><input type="checkbox" name="roles" value="manager"> Manager</label>
+                    <label><input type="checkbox" name="roles" value="other"> Other</label>
+                </div>
+                <input type="text" id="otherRoles" name="otherRoles" placeholder="Please specify other roles">
+            </div>
+            
+            <div class="form-group">
+                <label>20. What permissions should each role have?</label>
+                <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
+                    <tr style="background-color: #f2f2f2;">
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Role</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">View</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Upload</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Share</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Delete</th>
+                        <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Edit</th>
                     </tr>
                     <tr>
-                        <td><strong>Admin Access</strong></td>
-                        <td>
-                            - Full system configuration<br>
-                            - User management<br>
-                            - Access control settings<br>
-                            - System monitoring<br>
-                            - Backup management<br>
-                            - All features of lower tiers
-                        </td>
-                        <td>IT Administrators, System Owners</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Admin</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="admin_view"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="admin_upload"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="admin_share"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="admin_delete"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="admin_edit"></td>
                     </tr>
                     <tr>
-                        <td><strong>Manager Access</strong></td>
-                        <td>
-                            - Department-level data management<br>
-                            - Report creation and scheduling<br>
-                            - User invitation within department<br>
-                            - Dashboard customization<br>
-                            - Data import/export<br>
-                            - All features of lower tier
-                        </td>
-                        <td>Department Heads, Project Managers</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Major</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="major_view"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="major_upload"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="major_share"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="major_delete"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="major_edit"></td>
                     </tr>
                     <tr>
-                        <td><strong>Major Access</strong></td>
-                        <td>
-                            - Data viewing with filters<br>
-                            - Basic report generation<br>
-                            - Data analysis tools<br>
-                            - Image viewing and basic analysis<br>
-                            - Limited export capabilities
-                        </td>
-                        <td>Analysts, Field Technicians, Regular Users</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">Manager</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="manager_view"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="manager_upload"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="manager_share"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="manager_delete"></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;"><input type="checkbox" name="manager_edit"></td>
                     </tr>
                 </table>
-                
-                <p>Additionally, the system will support custom role creation with granular permission settings allowing you to define precisely what each user or user group can access, view, or modify.</p>
-                
-                <h3>Data Security Measures</h3>
-                <p>Our solution incorporates industry-leading security practices including:</p>
-                
-                <ul style="margin-left: 20px; margin-bottom: 20px;">
-                    <li><strong>End-to-end encryption</strong> for all data in transit and at rest</li>
-                    <li><strong>Multi-factor authentication</strong> for sensitive operations</li>
-                    <li><strong>Regular security audits</strong> and vulnerability assessments</li>
-                    <li><strong>Comprehensive audit logging</strong> of all system activities</li>
-                    <li><strong>Data anonymization</strong> options for sensitive information</li>
-                    <li><strong>IP-based access restrictions</strong> for additional security</li>
-                </ul>
-                
-               
-                
-                <h3>Backup Strategy</h3>
-                <p>To ensure data integrity and business continuity, our platform includes:</p>
-                
-                <ul style="margin-left: 20px;">
-                    <li><strong>Automated incremental backups</strong> on configurable schedules</li>
-                    <li><strong>Point-in-time recovery</strong> capabilities</li>
-                    <li><strong>Geo-redundant backup storage</strong> options</li>
-                    <li><strong>Backup verification</strong> and integrity checking</li>
-                    <li><strong>Disaster recovery planning</strong> and testing</li>
-                </ul>
+                <textarea id="otherPermissions" name="otherPermissions" placeholder="Additional permissions or details" style="margin-top: 10px;"></textarea>
             </div>
-        </div>
-    </section>
-    
-   
-    <section>
-        <div class="container">
-            <h2>Implementation Timeline</h2>
-            <p>We propose a phased implementation approach to ensure regular delivery of value while managing project complexity:</p>
             
-            <div class="timeline">
-                <div class="timeline-item timeline-left">
-                    <div class="timeline-content">
-                        <h3>Phase 1: Discovery & Design (4 weeks)</h3>
-                        <p>Detailed requirements gathering, system architecture design, UX/UI prototyping, and technical planning. This phase will establish the foundation for subsequent development work.</p>
-                        <p><strong>Deliverables:</strong> Detailed requirements document, system architecture diagrams, UI/UX prototypes</p>
-                    </div>
+            <div class="form-group">
+                <label>21. Can managers see reports from other managers or only their own?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="managerVisibility" value="ownOnly" required> Only their own</label>
+                    <label><input type="radio" name="managerVisibility" value="allManagers"> All managers' reports</label>
+                    <label><input type="radio" name="managerVisibility" value="conditional"> Conditional visibility (explain below)</label>
                 </div>
-                
-                <div class="timeline-item timeline-right">
-                    <div class="timeline-content">
-                        <h3>Phase 2: Core Platform Development (8 weeks)</h3>
-                        <p>Development of the core platform infrastructure, basic user interface, authentication system, and database architecture. This phase focuses on establishing the fundamental system capabilities.</p>
-                        <p><strong>Deliverables:</strong> Functional base platform, user authentication, database integration</p>
-                    </div>
+                <textarea id="visibilityDetails" name="visibilityDetails" placeholder="Please explain conditional visibility if selected"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>22. Do you need user groups (e.g., team-based report sharing)?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="userGroups" value="yes" required> Yes</label>
+                    <label><input type="radio" name="userGroups" value="no"> No</label>
                 </div>
-                
-                <div class="timeline-item timeline-left">
-                    <div class="timeline-content">
-                        <h3>Phase 3: Data Visualization & SDK Integration (6 weeks)</h3>
-                        <p>Implementation of data visualization components, Power BI integration, map viewers, and FLIR SDK integration. This phase adds the specialized analytical capabilities required.</p>
-                        <p><strong>Deliverables:</strong> Functional dashboards, FLIR integration, map visualization</p>
-                    </div>
+                <textarea id="groupDetails" name="groupDetails" placeholder="If yes, please describe how groups should work"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>23. Who can manage users and change roles?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="userManagers" value="admin"> Admin</label>
+                    <label><input type="checkbox" name="userManagers" value="major"> Major</label>
+                    <label><input type="checkbox" name="userManagers" value="manager"> Manager</label>
+                    <label><input type="checkbox" name="userManagers" value="other"> Other</label>
                 </div>
-                
-                <div class="timeline-item timeline-right">
-                    <div class="timeline-content">
-                        <h3>Phase 4: Advanced Features (6 weeks)</h3>
-                        <p>Development of PDF report generation, advanced filtering, data import/export tools, and analytics enhancements. This phase adds sophisticated data management capabilities.</p>
-                        <p><strong>Deliverables:</strong> Report generation system, advanced filters, import/export tools</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item timeline-left">
-                    <div class="timeline-content">
-                        <h3>Phase 5: Security & Administration (4 weeks)</h3>
-                        <p>Implementation of role-based access control, backup systems, audit logging, and security features. This phase ensures the platform meets enterprise security standards.</p>
-                        <p><strong>Deliverables:</strong> Access control system, backup solution, security features</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item timeline-right">
-                    <div class="timeline-content">
-                        <h3>Phase 6: Testing & Deployment (4 weeks)</h3>
-                        <p>Comprehensive testing, bug fixing, performance optimization, and production deployment. This phase ensures the platform is robust and ready for production use.</p>
-                        <p><strong>Deliverables:</strong> Tested, optimized platform ready for production</p>
-                    </div>
+                <input type="text" id="otherUserManagers" name="otherUserManagers" placeholder="Please specify other roles that can manage users">
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <!-- Sharing and Collaboration -->
+            <h2>E. Sharing and Collaboration</h2>
+            
+            <div class="form-group">
+                <label>24. Can reports/images be shared with other users or external stakeholders?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="sharingEnabled" value="yes" required> Yes</label>
+                    <label><input type="radio" name="sharingEnabled" value="no"> No</label>
+                    <label><input type="radio" name="sharingEnabled" value="internal"> Internal only</label>
+                    <label><input type="radio" name="sharingEnabled" value="external"> External only</label>
                 </div>
             </div>
             
-            <div class="card" style="margin-top: 40px;">
-                <h3>Total Estimated Timeline: 32 weeks</h3>
-                <p>This timeline includes regular milestone reviews and client feedback sessions throughout the process. We can adjust the timeline based on your specific priorities and requirements.</p>
+            <div class="form-group">
+                <label>25. How should sharing be done?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="sharingMethod" value="link"> Link</label>
+                    <label><input type="checkbox" name="sharingMethod" value="email"> Email</label>
+                    <label><input type="checkbox" name="sharingMethod" value="download"> Download</label>
+                    <label><input type="checkbox" name="sharingMethod" value="other"> Other</label>
+                </div>
+                <input type="text" id="otherSharingMethods" name="otherSharingMethods" placeholder="Please specify other sharing methods">
             </div>
-        </div>
-    </section>
+            
+            <div class="form-group">
+                <label>26. Should access to shared reports be time-limited or password-protected?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="sharingProtection" value="time"> Time-limited</label>
+                    <label><input type="checkbox" name="sharingProtection" value="password"> Password-protected</label>
+                    <label><input type="checkbox" name="sharingProtection" value="none"> No protection needed</label>
+                    <label><input type="checkbox" name="sharingProtection" value="other"> Other</label>
+                </div>
+                <input type="text" id="otherProtection" name="otherProtection" placeholder="Please specify other protection methods">
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <!-- Reporting and Export -->
+            <h2>F. Reporting and Export</h2>
+            
+            <div class="form-group">
+                <label>27. Should users be able to export reports as PDFs?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="pdfExport" value="yes" required> Yes</label>
+                    <label><input type="radio" name="pdfExport" value="no"> No</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>28. What should be included in PDF reports?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="pdfContent" value="images"> Images</label>
+                    <label><input type="checkbox" name="pdfContent" value="dataTables"> Data tables</label>
+                    <label><input type="checkbox" name="pdfContent" value="temperaturePoints"> Temperature points</label>
+                    <label><input type="checkbox" name="pdfContent" value="annotations"> Annotations</label>
+                    <label><input type="checkbox" name="pdfContent" value="other"> Other</label>
+                </div>
+                <input type="text" id="otherPdfContent" name="otherPdfContent" placeholder="Please specify other content for PDF reports">
+            </div>
+            
+            <div class="form-group">
+                <label>29. Should reports be downloadable in other formats?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="exportFormats" value="csv"> CSV</label>
+                    <label><input type="checkbox" name="exportFormats" value="excel"> Excel</label>
+                    <label><input type="checkbox" name="exportFormats" value="json"> JSON</label>
+                    <label><input type="checkbox" name="exportFormats" value="other"> Other</label>
+                </div>
+                <input type="text" id="otherExportFormats" name="otherExportFormats" placeholder="Please specify other export formats">
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <!-- Power BI Integration -->
+            <h2>G. Power BI Integration</h2>
+            
+            <div class="form-group">
+                <label for="powerBIIntegration">30. What exactly should be integrated with Power BI?</label>
+                <textarea id="powerBIIntegration" name="powerBIIntegration"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>31. Do you already have existing Power BI dashboards?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="existingDashboards" value="yes" required> Yes</label>
+                    <label><input type="radio" name="existingDashboards" value="no"> No</label>
+                </div>
+                <textarea id="dashboardDetails" name="dashboardDetails" placeholder="If yes, please provide details about existing dashboards"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>32. Should user-uploaded data automatically sync with Power BI?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="powerBISync" value="yes" required> Yes</label>
+                    <label><input type="radio" name="powerBISync" value="no"> No</label>
+                    <label><input type="radio" name="powerBISync" value="manual"> Manual sync only</label>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <!-- SDK Usage -->
+            <h2>H. SDK Usage</h2>
+            
+            <div class="form-group">
+                <label for="sdkFeatures">33. Which FLIR SDK features must be included in the app?</label>
+                <textarea id="sdkFeatures" name="sdkFeatures"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>34. Will this run on Windows server only, or Linux as well?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="serverOS" value="windows" required> Windows only</label>
+                    <label><input type="radio" name="serverOS" value="linux"> Linux only</label>
+                    <label><input type="radio" name="serverOS" value="both"> Both Windows and Linux</label>
+                    <label><input type="radio" name="serverOS" value="other"> Other</label>
+                </div>
+                <input type="text" id="otherServerOS" name="otherServerOS" placeholder="Please specify other server OS requirements">
+            </div>
+            
+            <div class="form-group">
+                <label>35. Is temperature analysis via SDK mandatory, or optional?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="tempAnalysis" value="mandatory" required> Mandatory</label>
+                    <label><input type="radio" name="tempAnalysis" value="optional"> Optional</label>
+                    <label><input type="radio" name="tempAnalysis" value="notNeeded"> Not needed</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>36. Should we support both Spinnaker and Atlas SDK or just one?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="sdkSupport" value="spinnaker" required> Spinnaker only</label>
+                    <label><input type="radio" name="sdkSupport" value="atlas"> Atlas only</label>
+                    <label><input type="radio" name="sdkSupport" value="both"> Both Spinnaker and Atlas</label>
+                    <label><input type="radio" name="sdkSupport" value="neither"> Neither</label>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <!-- Backup & Security -->
+            <h2>I. Backup & Security</h2>
+            
+            <div class="form-group">
+                <label>37. Do you need automatic data backup? If yes, how frequently?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="autoBackup" value="no" required> No automatic backup</label>
+                    <label><input type="radio" name="autoBackup" value="daily"> Daily</label>
+                    <label><input type="radio" name="autoBackup" value="weekly"> Weekly</label>
+                    <label><input type="radio" name="autoBackup" value="monthly"> Monthly</label>
+                    <label><input type="radio" name="autoBackup" value="custom"> Custom</label>
+                </div>
+                <input type="text" id="customBackup" name="customBackup" placeholder="If custom, please specify frequency">
+            </div>
+            
+            <div class="form-group">
+                <label>38. Should there be version control for uploaded files/reports?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="versionControl" value="yes" required> Yes</label>
+                    <label><input type="radio" name="versionControl" value="no"> No</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>39. Who can perform backups or restore data?</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="backupRoles" value="admin"> Admin</label>
+                    <label><input type="checkbox" name="backupRoles" value="major"> Major</label>
+                    <label><input type="checkbox" name="backupRoles" value="manager"> Manager</label>
+                    <label><input type="checkbox" name="backupRoles" value="other"> Other</label>
+                </div>
+                <input type="text" id="otherBackupRoles" name="otherBackupRoles" placeholder="Please specify other roles that can handle backups">
+            </div>
+            
+            <div class="form-group">
+                <label>40. Do you want audit logs of all actions (who did what and when)?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="auditLogs" value="yes" required> Yes</label>
+                    <label><input type="radio" name="auditLogs" value="no"> No</label>
+                    <label><input type="radio" name="auditLogs" value="limited"> Limited logging (explain below)</label>
+                </div>
+                <textarea id="auditLogDetails" name="auditLogDetails" placeholder="If limited, please specify which actions should be logged"></textarea>
+            </div
+
+
+</div>
+            
+<div class="section-divider"></div>
+
+<!-- Technical & Hosting -->
+<h2>J. Technical & Hosting</h2>
+
+<div class="form-group">
+    <label>41. Where will this application be hosted?</label>
+    <div class="radio-group">
+        <label><input type="radio" name="hosting" value="cloud" required> Cloud</label>
+        <label><input type="radio" name="hosting" value="onpremise"> On-premise</label>
+        <label><input type="radio" name="hosting" value="hybrid"> Hybrid</label>
+        <label><input type="radio" name="hosting" value="other"> Other</label>
+    </div>
+    <input type="text" id="otherHosting" name="otherHosting" placeholder="Please specify other hosting requirements">
+</div>
+
+<div class="form-group">
+    <label>42. Do you have a preferred tech stack or are you open to suggestions?</label>
+    <div class="radio-group">
+        <label><input type="radio" name="techStack" value="preferred" required> Have preferred stack</label>
+        <label><input type="radio" name="techStack" value="open"> Open to suggestions</label>
+    </div>
+    <div class="checkbox-group" style="margin-top: 10px;">
+        <label><input type="checkbox" name="preferredTech" value="node"> Node.js</label>
+        <label><input type="checkbox" name="preferredTech" value="mysql"> MySQL</label>
+        <label><input type="checkbox" name="preferredTech" value="react"> React</label>
+        <label><input type="checkbox" name="preferredTech" value="angular"> Angular</label>
+        <label><input type="checkbox" name="preferredTech" value="dotnet"> .NET</label>
+        <label><input type="checkbox" name="preferredTech" value="other"> Other</label>
+    </div>
+    <input type="text" id="otherTechStack" name="otherTechStack" placeholder="Please specify other tech stack preferences">
+</div>
+
+<div class="form-group">
+    <label>43. Should the application support offline mode?</label>
+    <div class="radio-group">
+        <label><input type="radio" name="offlineMode" value="yes" required> Yes</label>
+        <label><input type="radio" name="offlineMode" value="no"> No</label>
+        <label><input type="radio" name="offlineMode" value="limited"> Limited offline capabilities</label>
+    </div>
+    <textarea id="offlineDetails" name="offlineDetails" placeholder="If limited, please specify what offline capabilities are needed"></textarea>
+</div>
+
+<div class="form-group">
+    <label>44. Are there performance requirements?</label>
+    <div class="checkbox-group">
+        <label><input type="checkbox" name="performanceReqs" value="loadTime"> Load time requirements</label>
+        <label><input type="checkbox" name="performanceReqs" value="imageSizeLimit"> Image size limits</label>
+        <label><input type="checkbox" name="performanceReqs" value="concurrentUsers"> Concurrent user support</label>
+        <label><input type="checkbox" name="performanceReqs" value="other"> Other</label>
+    </div>
+    <textarea id="performanceDetails" name="performanceDetails" placeholder="Please provide details about performance requirements"></textarea>
+</div>
+
+<div class="form-group">
+    <label>45. Do you need user authentication with SSO/LDAP integration?</label>
+    <div class="radio-group">
+        <label><input type="radio" name="ssoIntegration" value="yes" required> Yes</label>
+        <label><input type="radio" name="ssoIntegration" value="no"> No, basic authentication is fine</label>
+        <label><input type="radio" name="ssoIntegration" value="both"> Both options</label>
+    </div>
+    <div class="checkbox-group" style="margin-top: 10px;">
+        <label><input type="checkbox" name="authMethod" value="microsoft"> Microsoft/Azure AD</label>
+        <label><input type="checkbox" name="authMethod" value="google"> Google</label>
+        <label><input type="checkbox" name="authMethod" value="ldap"> LDAP</label>
+        <label><input type="checkbox" name="authMethod" value="saml"> SAML</label>
+        <label><input type="checkbox" name="authMethod" value="oauth"> OAuth</label>
+        <label><input type="checkbox" name="authMethod" value="other"> Other</label>
+    </div>
+    <input type="text" id="otherAuthMethod" name="otherAuthMethod" placeholder="Please specify other authentication methods">
+</div>
+
+<div class="section-divider"></div>
+
+<!-- Notifications & Alerts -->
+<h2>K. Notifications & Alerts</h2>
+
+<div class="form-group">
+    <label>46. Should users receive email notifications?</label>
+    <div class="checkbox-group">
+        <label><input type="checkbox" name="emailNotifications" value="upload"> On upload</label>
+        <label><input type="checkbox" name="emailNotifications" value="share"> On share</label>
+        <label><input type="checkbox" name="emailNotifications" value="completion"> Report completion</label>
+        <label><input type="checkbox" name="emailNotifications" value="approval"> Approval required</label>
+        <label><input type="checkbox" name="emailNotifications" value="other"> Other</label>
+    </div>
+    <input type="text" id="otherNotifications" name="otherNotifications" placeholder="Please specify other notification events">
+</div>
+
+<div class="form-group">
+    <label>47. Are there any thresholds or temperature ranges that should trigger alerts?</label>
+    <div class="radio-group">
+        <label><input type="radio" name="temperatureAlerts" value="yes" required> Yes</label>
+        <label><input type="radio" name="temperatureAlerts" value="no"> No</label>
+    </div>
+    <textarea id="alertDetails" name="alertDetails" placeholder="If yes, please specify the thresholds and alert recipients"></textarea>
+</div>
+
+<div class="form-group">
+    <label>48. Should system errors be logged and sent to admin users?</label>
+    <div class="radio-group">
+        <label><input type="radio" name="errorAlerts" value="yes" required> Yes</label>
+        <label><input type="radio" name="errorAlerts" value="no"> No</label>
+        <label><input type="radio" name="errorAlerts" value="criticalOnly"> Critical errors only</label>
+    </div>
+    <div class="checkbox-group" style="margin-top: 10px;">
+        <label><input type="checkbox" name="errorNotificationMethod" value="email"> Email</label>
+        <label><input type="checkbox" name="errorNotificationMethod" value="dashboard"> Dashboard notification</label>
+        <label><input type="checkbox" name="errorNotificationMethod" value="sms"> SMS</label>
+        <label><input type="checkbox" name="errorNotificationMethod" value="other"> Other</label>
+    </div>
+    <input type="text" id="otherErrorMethod" name="otherErrorMethod" placeholder="Please specify other error notification methods">
+</div>
+
+<div class="section-divider"></div>
+
+<!-- Future Expectations -->
+<h2>L. Future Expectations</h2>
+
+<div class="form-group">
+    <label>49. Are there any features planned for future phases?</label>
+    <div class="checkbox-group">
+        <label><input type="checkbox" name="futureFeatures" value="mobileApp"> Mobile app</label>
+        <label><input type="checkbox" name="futureFeatures" value="aiAnalysis"> AI analysis</label>
+        <label><input type="checkbox" name="futureFeatures" value="integrations"> Third-party integrations</label>
+        <label><input type="checkbox" name="futureFeatures" value="advancedReporting"> Advanced reporting</label>
+        <label><input type="checkbox" name="futureFeatures" value="other"> Other</label>
+    </div>
+    <textarea id="futureDetails" name="futureDetails" placeholder="Please provide details about planned future features"></textarea>
+</div>
+
+<div class="form-group">
+    <label>50. Any additional comments or requirements not covered in this form?</label>
+    <textarea id="additionalComments" name="additionalComments" style="height: 150px;"></textarea>
+</div>
+
+<button type="submit">Submit Requirements</button>
+</form>
+</div>
+
+<script>
+document.getElementById('requirementsForm').addEventListener('submit', function(e) {
+    e.preventDefault();
     
-    <section style="background-color: #f1f5f9;">
-        <div class="container">
-            <h2>Why Choose HimalayasTechies</h2>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <h3>Technical Expertise</h3>
-                    <p>Our team includes specialists in data visualization, analytics, FLIR SDK integration, and secure web application development, ensuring all aspects of your project are handled with expertise.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Proven Track Record</h3>
-                    <p>We have successfully delivered similar data management platforms for clients across various industries, with a focus on security, usability, and performance.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Agile Methodology</h3>
-                    <p>Our development process emphasizes regular client feedback, adaptability to changing requirements, and continuous delivery of functional components.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Post-Launch Support</h3>
-                    <p>We offer comprehensive maintenance and support packages to ensure your platform continues to operate optimally after launch.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Scalable Solutions</h3>
-                    <p>Our architectures are designed for growth, allowing your platform to scale seamlessly as your data volumes and user base expand.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h3>Security Focus</h3>
-                    <p>We prioritize data security at every level of development, implementing industry best practices and regular security audits.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    // Create a FormData object to collect all form inputs
+    const formData = new FormData(this);
+    let formMessage = "Thermal Application Requirements Form Submission:\n\n";
     
-    <section>
-        <div class="container">
-            <h2>Investment & Next Steps</h2>
-            <div class="card">
-                <h3>Project Investment</h3>
-                <p>Based on the requirements outlined and our proposed solution, we estimate the total investment for this project to be in the range of:</p>
-                
-                <div style="text-align: center; margin: 30px 0; font-size: 24px; font-weight: bold; color: var(--primary);">
-                    [....]
-                </div>
-                
-                <p>This estimate includes:</p>
-                <ul style="margin-left: 20px; margin-bottom: 20px;">
-                    <li>Complete platform development across all phases</li>
-                    <li>Project management and quality assurance</li>
-                    <li>System documentation and knowledge transfer</li>
-                    <li>Initial deployment and configuration</li>
-                    <li>90 days of post-launch support and bug fixes</li>
-                </ul>
-                
-                <p>A detailed cost breakdown can be provided upon request, and payment would be structured according to project milestones.</p>
-                
-                <h3>Next Steps</h3>
-                <ol style="margin-left: 20px; margin-bottom: 20px;">
-                    <li>Schedule a detailed discovery meeting to refine requirements</li>
-                    <li>Finalize project scope, timeline, and investment</li>
-                    <li>Sign agreement and schedule project kickoff</li>
-                    <li>Begin Phase 1: Discovery & Design</li>
-                </ol>
-                
-                <div style="text-align: center; margin-top: 30px;">
-                    <a href="#"   <div style="text-align: center; margin-top: 30px;">
-                        <a href="#" class="btn">Contact Us to Get Started</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <footer>
-            <div class="container">
-                <div class="footer-content">
-                    <div class="logo">Himalayas<span>Techies</span></div>
-                    <div class="contact-info">
-                        <p>Email: info@himalayastechies.com</p>
-                        <p>Phone:  +551194772-7979</p>
-                        <p>Av Marcos Penteado de Ulhoa Rodrigues , 939 , Alphaville Barueri SP</p>
-                    </div>
-                    <p>&copy; 2025 HimalayasTechies. All rights reserved.</p>
-                </div>
-            </div>
-        </footer>
-    </body>
-    </html>
+    // Iterate through form entries and build message string
+    for (const [key, value] of formData.entries()) {
+        if (value && value.trim() !== '') {
+            formMessage += `${key}: ${value}\n`;
+        }
+    }
+    
+    // Show success message
+    alert('Form submitted successfully! A confirmation will be sent to the provided contact details.');
+    
+    // Open WhatsApp with form data
+    const whatsappNumber = "+919872567925";
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(formMessage)}`, '_blank');
+});
+</script>
+</body>
+</html>
